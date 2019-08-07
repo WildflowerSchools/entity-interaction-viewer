@@ -1,6 +1,7 @@
 const path = require('path');
 const package = require('./package.json');
 const DefinePlugin = require('webpack').DefinePlugin;
+const TerserPlugin = require('terser-webpack-plugin');
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 
 require('dotenv').config();
@@ -47,6 +48,13 @@ module.exports = (env, options) => {
         'process.env.AUTH0_AUDIENCE': JSON.stringify(process.env.AUTH0_AUDIENCE)
       }),
       new ErrorOverlayPlugin()
-    ]
+    ],
+    optimization: {
+      minimizer: [
+        new TerserPlugin({
+          terserOptions: {output: {comments: false}}
+        })
+      ]
+    }
   };
 };
