@@ -1,0 +1,33 @@
+{
+  "name": "entity-interaction-viewer",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "auth0-js": "^9.11.3",
+    "emotion": "^10.0.14",
+    "frappe-charts": "^1.2.4",
+    "react": "^16.8.6",
+    "react-async": "^7.0.6",
+    "react-day-picker": "^7.3.1",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "react-scripts": "3.0.1"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ]
+  }
+}
