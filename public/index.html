@@ -74,10 +74,11 @@
         <h1>Lorem Ipsum Dolor</h1>
         <p>Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 
-        <div id="root"></div>
-        <script src="/bundle.js"></script>
+        <script async src="/bundle.js"></script>
         <script>
-        wildflower.embed('f46eade3');
+        function wildflower(o) { wildflower.o = o; };
+        wildflower();
+        // wildflower({target: '#sidebar'});
         </script>
 
     </main>
