@@ -4,7 +4,7 @@ import { Chart as Frappe } from 'frappe-charts/dist/frappe-charts.min.esm';
 import '../utils';
 
 const styles = css`
-  /* background: #CCC; */
+
 `;
 
 function Chart({data}) {

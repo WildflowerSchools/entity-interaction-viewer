@@ -5,6 +5,7 @@ import Landing from './Landing';
 import Login from './Login';
 
 const styles = css`
+  * { box-sizing: border-box; }
   font-size: 16px;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   outline: #F00 1px dotted;

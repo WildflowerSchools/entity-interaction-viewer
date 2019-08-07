@@ -6,14 +6,13 @@ const styles = css`
   display: inline-block;
   position: relative;
   margin: 0;
-  padding: 0.75em 1.5em;
+  padding: 0.75em 1.25em;
   font-size: 1em;
-  font-weight: 500;
   font-family: inherit;
   line-height: 1;
   color: #FFF;
-  background-color: #20a79f;
-  border: 2px solid #20a79f;
+  border: none;
+  background-color: #20A79F;
   letter-spacing: 0.05em;
   text-decoration: none;
   text-transform: uppercase;
@@ -29,6 +28,11 @@ const styles = css`
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+
+  &:focus,
+  &:hover {
+    background-color: #0E928A;
+  }
 `
 
 function Button({
