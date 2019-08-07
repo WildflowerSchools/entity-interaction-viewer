@@ -21,7 +21,7 @@ function Chart({data}) {
 
     chart.current = new Frappe(ref.current, {
       type: 'bar',
-      height: 600,
+      height: 500,
       colors: ['#7cd6fd', '#743ee2', '#ff4490', '#c0ffee'],
       data
     });

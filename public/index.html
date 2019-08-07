@@ -2,42 +2,92 @@
 <html lang="en">
 <head>
 
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <!--
-    manifest.json provides metadata used when your web app is installed on a
-    user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-    Notice the use of %PUBLIC_URL% in the tags above.
-    It will be replaced with the URL of the `public` folder during the build.
-    Only files inside the `public` folder can be referenced from the HTML.
-    Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-    work correctly both with client-side routing and a non-root public URL.
-    Learn how to configure a non-root public URL by running `npm run build`.
-    -->
     <title>Wildflower Schools</title>
 
-    <!-- stylessheets from https://www.transparentclassroom.com/ -->
-    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:600">
-    <link rel="stylesheet" href="https://dhabtygr2920s.cloudfront.net/webpack/common-97adedf2a88eee72d145.css"> -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <style>
+
+    *, *:before, *:after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body {
+        font: 18px Arial, sans-serif;
+        line-height: 1.4;
+        color: #333;
+        background-color: #f9f9f9;
+    }
+    h1 {
+        margin-bottom: 0.5em;
+    }
+    p {
+        margin: 0 0 1.5em 0;
+    }
+    p:last-child {
+        margin-bottom: 0;
+    }
+    code {
+        font-weight: bold;
+        background: #555;
+        color: #FFF;
+        padding: 3px 5px;
+        border-radius: 3px;
+    }
+    .container {
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+    .content {
+        padding-top: 2em;
+        padding-bottom: 2em;
+    }
+    #sidebar {
+        position: absolute;
+        left: 2em;
+        right: 2em;
+        bottom: 2em;
+        padding: 2em;
+        border-radius: 0.5em;
+        background-color: #DDD;
+    }
+
+    @media (min-width: 768px) {
+        #sidebar { width: 50%; }
+    }
+
+    </style>
 
 </head>
 <body>
 
-    <div id="root"></div>
-    <!--
-    This HTML file is a template.
-    If you open it directly in the browser, you will see an empty page.
-    You can add webfonts, meta tags, or analytics to this file.
-    The build step will place the bundled scripts into the <body> tag.
-    To begin the development, run `npm start` or `yarn start`.
-    To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+<div class="container">
+
+    <main class="content">
+
+        <h1>Lorem Ipsum Dolor</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+        <div id="root"></div>
+        <script src="/bundle.js"></script>
+
+        <!-- <script>
+        wildflower.embed('f46eade3', {target: '#sidebar'});
+        </script> -->
+
+    </main>
+
+    <aside id="sidebar">
+        <p>Render the app inside this element by passing <code>target: '#sidebar'</code> into the init options.</p>
+    </aside>
+
+</div>
 
 </body>
 </html>

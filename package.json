@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "npm run clean && webpack-dev-server --mode development",
+    "build": "npm run clean && webpack --mode production",
+    "clean": "rm -rf build/*",
+    "test": "echo 'tsk tsk... you should be testing'"
   },
   "dependencies": {
     "auth0-js": "^9.11.3",
@@ -18,16 +18,14 @@
     "react-dom": "^16.8.6"
   },
   "devDependencies": {
-    "react-scripts": "3.0.1"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ]
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "dotenv": "^8.0.0",
+    "error-overlay-webpack-plugin": "^0.4.0",
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.7.2"
   }
 }

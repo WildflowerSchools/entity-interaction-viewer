@@ -4,10 +4,10 @@ import { useAsync } from 'react-async';
 import { isEmpty } from '../utils';
 
 // const auth0 = new WebAuth({
-//   clientID: process.env.REACT_APP_AUTH0_CLIENT,
-//   domain: process.env.REACT_APP_AUTH0_DOMAIN,
-//   redirectUri: process.env.REACT_APP_AUTH0_CALLBACK,
-//   audience: process.env.REACT_APP_AUTH0_AUDIENCE,
+//   clientID: process.env.AUTH0_CLIENT,
+//   domain: process.env.AUTH0_DOMAIN,
+//   audience: process.env.AUTH0_AUDIENCE,
+//   redirectUri: process.env.AUTH0_CALLBACK,
 //   responseType: 'token id_token'
 // });
 
