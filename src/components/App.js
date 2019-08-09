@@ -5,10 +5,25 @@ import Landing from './Landing';
 import Login from './Login';
 
 const styles = css`
-  * { box-sizing: border-box; }
   font-size: 16px;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  outline: #F00 1px dotted;
+  max-width: 100%;
+
+  * {
+    box-sizing: border-box;
+  }
+  a {
+    color: #20A79F;
+    text-decoration: none;
+
+    &:hover {
+      color: #0E928A;
+      text-decoration: underline;
+    }
+  }
+  .wfs-footer {
+    font-size: 0.8125em;
+    color: #808080;
+  }
 `
 
 function App(props) {

@@ -12,19 +12,23 @@
     "@nivo/bar": "^0.59.2",
     "auth0-js": "^9.11.3",
     "emotion": "^10.0.14",
+    "graphql-hooks": "^3.6.1",
     "react": "^16.8.6",
     "react-async": "^7.0.6",
     "react-day-picker": "^7.3.1",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react-select": "^3.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
+    "css-loader": "^3.2.0",
     "dotenv": "^8.0.0",
     "error-overlay-webpack-plugin": "^0.4.0",
     "terser-webpack-plugin": "^1.4.1",
+    "to-string-loader": "^1.1.5",
     "webpack": "^4.39.1",
     "webpack-cli": "^3.3.6",
     "webpack-dev-server": "^3.7.2"

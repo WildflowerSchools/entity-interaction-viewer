@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAuth } from '../context/auth';
 import Button from './Button';
+import Filters from './Filters';
 import Chart from './Chart';
 
 const data = [
@@ -111,15 +112,48 @@ const data = [
   }
 ];
 
+// function Heading(props) {
+//   return <h1>{props.children}</h1>
+// }
+// function Text(props) {
+//   const { as: Element = 'span', children } = props;
+//   return <Element>{children}</Element>
+// }
+
+// import { css } from 'emotion';
+// const headerStyles = css`
+//   display: flex;
+// `
+
+// function Header(props) {
+//   return (
+//     <header className={headerStyles}>
+//       {props.children}
+//     </header>
+//   );
+// }
+
+
 function Landing(props) {
 
   const { logout } = useAuth();
 
   return (
-    <div>
-      <Button onClick={logout}>Logout</Button>
+    <React.Fragment>
+
+      <h1>Material Interaction Details</h1>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
+
+      <Filters />
       <Chart data={data} />
-    </div>
+
+      <div className="wfs-footer">
+        Interaction reporting by <a href="https://wildflowerschools.org/" target="_blank">Wildflower Schools</a>
+        &nbsp;&nbsp;&bull;&nbsp;&nbsp;
+        <Button variant="link" onClick={logout}>Logout</Button>
+      </div>
+
+    </React.Fragment>
   );
 }
 

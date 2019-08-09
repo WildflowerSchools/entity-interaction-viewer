@@ -8,11 +8,12 @@ const styles = css`
   margin: 0;
   padding: 0.75em 1.25em;
   font-size: 1em;
-  font-family: inherit;
   line-height: 1;
   color: #FFF;
   border: none;
+  border-radius: 3px;
   background-color: #20A79F;
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2);
   letter-spacing: 0.05em;
   text-decoration: none;
   text-transform: uppercase;
@@ -33,10 +34,27 @@ const styles = css`
   &:hover {
     background-color: #0E928A;
   }
+
+  &.link {
+    display: inline;
+    padding: 0;
+    color: #20A79F;
+    background: transparent;
+    box-shadow: none;
+    text-transform: none;
+    letter-spacing: 0;
+
+    &:focus,
+    &:hover {
+      color: #0E928A;
+      text-decoration: underline;
+    }
+  }
 `
 
 function Button({
   as: Element = 'button',
+  variant = '',
   className = '',
   children,
   ...props
@@ -47,7 +65,7 @@ function Button({
   }
 
   return (
-    <Element className={cx(styles, className)} {...props}>
+    <Element className={cx(styles, variant, className)} {...props}>
       {children}
     </Element>
   );

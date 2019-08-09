@@ -1,12 +1,17 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { domready, isString } from './utils';
+import { domready, isObject, isString } from './utils';
 import Providers from './context';
 import App from './components/App';
 
 domready(() => {
 
-  const options = (window.wildflower && window.wildflower.o) || {};
+  if (!window.wildflower || !isObject(window.wildflower.o)) {
+    console.warn(`[wildflower] embed not initialized`);
+    return;
+  }
+
+  const options = window.wildflower.o;
   const container = document.createElement('div');
   container.id = 'wildflower';
 
