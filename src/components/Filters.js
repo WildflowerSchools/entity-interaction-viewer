@@ -26,23 +26,24 @@ const styles = css`
     font-weight: 400;
 
     &:hover:not(.DayPicker-Day--outside):not(.DayPicker-Day--disabled) {
-      background-color: rgba(35,181,173,0.15) !important;
+      color: #FFF !important;
+      background-color: #20A79F !important;
     }
   }
   .DayPicker-Day--today {
-    color: #20A79F;
+    color: inherit;
+    font-weight: 400;
   }
-  .DayPicker-Day--start:not(.DayPicker-Day--outside) {
-    color: #FFF !important;
-    background-color: #20A79F !important;
+  .DayPicker-Day--start:not(.DayPicker-Day--outside),
+  .DayPicker-Day--end:not(.DayPicker-Day--outside),
+  .DayPicker-Day--selected:not(.DayPicker-Day--outside) {
+    color: #069A91 !important;
+    background-color: rgba(35,181,173,0.1) !important;
+    font-weight: 400;
   }
-  .DayPicker-Day--end:not(.DayPicker-Day--outside) {
-    color: #FFF !important;
-    background-color: #20A79F !important;
-  }
-  .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
-    color: #FFF !important;
-    background-color: #20A79F !important;
+
+  button svg {
+    width: 22px;
   }
 `
 
@@ -54,25 +55,25 @@ function formatDate(date) {
 }
 
 const initialState = {
-  display: 'bar',
-  student: '',
+  display: null,
+  student: null,
   startDate: undefined,
   endDate: undefined
 };
 
-function Filters(props) {
+function Filters({students}) {
 
   const [ state, setState ] = useState(initialState);
-  const { startDate, endDate } = state;
+  const { display, student, startDate, endDate } = state;
 
   const endRef = useRef();
   const today = new Date();
 
-  function onDisplayChange({value}) {
+  function onDisplayChange(value) {
     setState(state => ({...state, display: value}));
   }
 
-  function onStudentChange({value}) {
+  function onStudentChange(value) {
     setState(state => ({...state, student: value}));
   }
 
@@ -97,23 +98,22 @@ function Filters(props) {
     {value: 'timeline', label: 'Timeline'}
   ];
 
-  const students = useMemo(() => ([
-    {value: null, label: 'All Students'},
-    {value: '123', label: 'Johnny Anderson'},
-    {value: '345', label: 'Jenny Wallen'},
-    {value: '567', label: 'Jane Doe'}
-  ]), []);
+  students = [
+    {value: null, label: 'All Students'}
+  ].concat(students);
 
   return (
     <div className={styles}>
       <Field label="Display">
         <Select
+          value={display || displays[0]}
           options={displays}
           onChange={onDisplayChange}
         />
       </Field>
       <Field label="Student">
         <Select
+          value={student || students[0]}
           options={students}
           onChange={onStudentChange}
         />
@@ -139,16 +139,21 @@ function Filters(props) {
           placeholder="End Date"
           onDayChange={onEndDateChange}
           dayPickerProps={{
-            month: startDate,
             fromMonth: startDate,
             toMonth: today,
+            month: startDate,
             modifiers: {start: startDate, end: endDate},
             selectedDays: [startDate, {from: startDate, to: endDate}],
             disabledDays: {before: startDate, after: today}
           }}
         />
       </Field>
-      <Button onClick={refresh}>Refresh</Button>
+      <Button onClick={refresh}>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
+          <title>Refresh</title>
+          <path fill="currentColor" fillRule="evenodd" d="M11 19.356c-4.537 0-8.25-3.712-8.25-8.25 0-4.537 3.713-8.25 8.25-8.25 2.269 0 4.331.963 5.775 2.475l-4.4 4.4H22V.106l-3.231 3.232A10.964 10.964 0 0 0 11 .106c-6.05 0-11 4.95-11 11s4.88 11 11 11c5.065 0 9.268-3.383 10.588-8h-2.91c-1.171 3.098-4.196 5.25-7.678 5.25z"/>
+        </svg>
+      </Button>
     </div>
   )
 }

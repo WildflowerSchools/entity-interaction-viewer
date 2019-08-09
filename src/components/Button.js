@@ -13,7 +13,6 @@ const styles = css`
   border: none;
   border-radius: 3px;
   background-color: #20A79F;
-  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2);
   letter-spacing: 0.05em;
   text-decoration: none;
   text-transform: uppercase;
@@ -40,7 +39,6 @@ const styles = css`
     padding: 0;
     color: #20A79F;
     background: transparent;
-    box-shadow: none;
     text-transform: none;
     letter-spacing: 0;
 
