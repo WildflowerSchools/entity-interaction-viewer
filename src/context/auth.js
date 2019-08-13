@@ -68,7 +68,7 @@ function AuthProvider(props) {
 
 function useAuth() {
   const context = useContext(Context);
-  if (!context) throw new Error('useAuth must be used within a AuthProvider');
+  if (!context) throw new Error('useAuth must be used within an AuthProvider');
   return context;
 }
 

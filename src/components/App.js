@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { css } from 'emotion';
 import { useAuth } from '../context/auth';
+import { useComponentSize } from '../hooks';
 import Landing from './Landing';
 import Login from './Login';
 
@@ -28,10 +29,13 @@ const styles = css`
 
 function App(props) {
 
+  const ref = useRef();
+  const { width } = useComponentSize(ref);
   const { isAuthed } = useAuth();
 
   return (
-    <div className={styles}>
+    <div ref={ref} className={styles}>
+      {window.debug('embed width: ' + width)}
       {isAuthed ? <Landing /> : <Login />}
     </div>
   );

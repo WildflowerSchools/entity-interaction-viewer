@@ -33,21 +33,6 @@ const styles = css`
   &:hover {
     background-color: #0E928A;
   }
-
-  &.link {
-    display: inline;
-    padding: 0;
-    color: #20A79F;
-    background: transparent;
-    text-transform: none;
-    letter-spacing: 0;
-
-    &:focus,
-    &:hover {
-      color: #0E928A;
-      text-decoration: underline;
-    }
-  }
 `
 
 function Button({

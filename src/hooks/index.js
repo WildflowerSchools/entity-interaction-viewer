@@ -1,0 +1,1 @@
+export { default as useComponentSize } from './use-component-size';
