@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useAuth } from '../context/auth';
 import { useQuery } from '../context/data';
 import Filters from './Filters';
@@ -9,14 +9,12 @@ function Landing(props) {
   const { logout } = useAuth();
   const { data } = useQuery('some query here...');
 
-  // TODO: can / should this be a query? useQuery(Queries.STUDENTS)
-  const students = Object.values(data.reduce((result, {person}) => {
-    const { person_id: id, name } = person;
-    if (!result[id]) result[id] = {value: id, label: name};
-    return result;
-  }, {}));
-
-  console.log(students)
+  const students = useMemo(() => {
+    return data.map(entry => ({
+      value: entry.person_id,
+      label: entry.name
+    })).sort((a, b) => a.label < b.label ? -1 : 1)
+  }, []);
 
   return (
     <React.Fragment>

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { css } from 'emotion';
 import { useAuth } from '../context/auth';
 import { useBreakpoints } from '../hooks';
@@ -36,12 +36,14 @@ const styles = css`
 function App(props) {
 
   const { isAuthed } = useAuth();
+  const [ clicks, setClicks ] = useState(0);
 
   const ref = useRef();
   useBreakpoints(ref, breakpoints);
 
   return (
-    <div ref={ref} className={styles}>
+    <div ref={ref} className={styles} onClick={() => setClicks(clicks + 1)}>
+      {clicks}
       {isAuthed ? <Landing /> : <Login />}
     </div>
   );

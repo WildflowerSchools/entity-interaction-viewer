@@ -2,7 +2,8 @@ import { useLayoutEffect } from 'react';
 
 export default function useBreakpoints(ref, breakpoints) {
 
-  // sort provided breakpoints as [key, value] pairs, which may come from embed options
+  // sort provided breakpoints by width as [key, value] pairs,
+  // which may be in an arbitrary order if coming from embed options
   breakpoints = Object.keys(breakpoints)
     .map(key => [key, breakpoints[key]])
     .sort((a, b) => b[1] - a[1]);
