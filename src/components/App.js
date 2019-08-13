@@ -1,9 +1,15 @@
 import React, { useRef } from 'react';
 import { css } from 'emotion';
 import { useAuth } from '../context/auth';
-import { useComponentSize } from '../hooks';
+import { useBreakpoints } from '../hooks';
 import Landing from './Landing';
 import Login from './Login';
+
+const breakpoints = {
+  sm: 400,
+  md: 600,
+  lg: 800
+};
 
 const styles = css`
   font-size: 16px;
@@ -29,13 +35,13 @@ const styles = css`
 
 function App(props) {
 
-  const ref = useRef();
-  const { width } = useComponentSize(ref);
   const { isAuthed } = useAuth();
+
+  const ref = useRef();
+  useBreakpoints(ref, breakpoints);
 
   return (
     <div ref={ref} className={styles}>
-      {window.debug('embed width: ' + width)}
       {isAuthed ? <Landing /> : <Login />}
     </div>
   );

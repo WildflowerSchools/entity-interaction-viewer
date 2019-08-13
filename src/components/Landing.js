@@ -9,6 +9,7 @@ function Landing(props) {
   const { logout } = useAuth();
   const { data } = useQuery('some query here...');
 
+  // TODO: can / should this be a query? useQuery(Queries.STUDENTS)
   const students = Object.values(data.reduce((result, {person}) => {
     const { person_id: id, name } = person;
     if (!result[id]) result[id] = {value: id, label: name};

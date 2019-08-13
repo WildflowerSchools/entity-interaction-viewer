@@ -1,1 +1,1 @@
-export { default as useComponentSize } from './use-component-size';
+export { default as useBreakpoints } from './use-breakpoints';
