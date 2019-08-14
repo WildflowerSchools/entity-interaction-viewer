@@ -17,7 +17,7 @@ async function init() {
   if (!token) return Promise.resolve(null);
 
   return await new Promise(resolve => {
-    const delay = 500 + Math.random() * 2500;
+    const delay = 0; // 500 + Math.random() * 2500;
     setTimeout(() => resolve(Math.random()), delay);
   });
 }

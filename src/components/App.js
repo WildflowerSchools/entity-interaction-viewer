@@ -1,15 +1,33 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { css } from 'emotion';
 import { useAuth } from '../context/auth';
 import { useBreakpoints } from '../hooks';
-import Landing from './Landing';
+import Dashboard from './Dashboard';
 import Login from './Login';
 
-const breakpoints = {
-  sm: 400,
-  md: 600,
-  lg: 800
-};
+// const concentrations = {
+//   CONCENTRATION: 'Concentration',
+//   DISTRACTED_WORKING: 'Distracted Working',
+//   DISORDER: 'Disorder'
+// };
+
+// const engagements = {
+//   GA: 'Group Activity',
+//   GL: 'Getting Lesson',
+//   HA: 'Horsing Around',
+//   Wait: 'Waiting',
+//   Wd: 'Wandering',
+//   W: 'Working',
+//   S: 'Snacking',
+//   Obs: 'Observing',
+//   Other: 'Other'
+// };
+
+// const interactions = {
+//   COMPLETELY: 'Completely',
+//   PARTIAL: 'Partial',
+//   NOT: 'Not'
+// };
 
 const styles = css`
   font-size: 16px;
@@ -31,20 +49,28 @@ const styles = css`
     font-size: 0.8125em;
     color: #808080;
   }
+  .wfs-tooltip {
+    position: absolute;
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s;
+  }
+  .wfs-tooltip.active {
+    opacity: 1;
+    visibility: visible;
+  }
 `
 
 function App(props) {
 
   const { isAuthed } = useAuth();
-  const [ clicks, setClicks ] = useState(0);
-
   const ref = useRef();
-  useBreakpoints(ref, breakpoints);
+  useBreakpoints(ref, props.breakpoints);
 
   return (
-    <div ref={ref} className={styles} onClick={() => setClicks(clicks + 1)}>
-      {clicks}
-      {isAuthed ? <Landing /> : <Login />}
+    <div ref={ref} className={styles}>
+      {isAuthed ? <Dashboard /> : <Login />}
     </div>
   );
 }

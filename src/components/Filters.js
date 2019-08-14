@@ -1,9 +1,9 @@
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { css } from 'emotion';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
-import Select from 'react-select';
 import Field from './Field';
 import Button from './Button';
+import Select from './Select';
 
 const styles = css`
   display: flex;
@@ -47,6 +47,13 @@ const styles = css`
   }
 `
 
+const initialState = {
+  chart: '',
+  student: '',
+  startDate: undefined,
+  endDate: undefined
+};
+
 function formatDate(date) {
   const yyyy = date.getFullYear();
   const mm = String(date.getMonth() + 1).padStart(2, '0');
@@ -54,23 +61,16 @@ function formatDate(date) {
   return `${yyyy}-${mm}-${dd}`;
 }
 
-const initialState = {
-  display: null,
-  student: null,
-  startDate: undefined,
-  endDate: undefined
-};
-
-function Filters({students}) {
+function Filters({charts, students}) {
 
   const [ state, setState ] = useState(initialState);
-  const { display, student, startDate, endDate } = state;
+  const { chart, student, startDate, endDate } = state;
 
   const endRef = useRef();
   const today = new Date();
 
-  function onDisplayChange(value) {
-    setState(state => ({...state, display: value}));
+  function onChartChange(value) {
+    setState(state => ({...state, chart: value}));
   }
 
   function onStudentChange(value) {
@@ -93,27 +93,23 @@ function Filters({students}) {
     alert(JSON.stringify(state));
   }
 
-  const displays = [
-    {value: 'bar', label: 'Bar Chart'},
-    {value: 'timeline', label: 'Timeline'}
-  ];
-
   students = [
     {value: null, label: 'All Students'}
   ].concat(students);
 
   return (
     <div className={styles}>
-      <Field label="Display">
+      <div className="wfs-field">
+        <label className="wfs-label">Display</label>
         <Select
-          value={display || displays[0]}
-          options={displays}
-          onChange={onDisplayChange}
+          value={chart}
+          options={charts}
+          onChange={onChartChange}
         />
-      </Field>
+      </div>
       <Field label="Student">
         <Select
-          value={student || students[0]}
+          value={student}
           options={students}
           onChange={onStudentChange}
         />

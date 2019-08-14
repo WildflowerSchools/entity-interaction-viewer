@@ -39,10 +39,6 @@ export function isElement(value) {
   return !!(value && value.nodeType === 1);
 };
 
-export function isEmail(value) {
-  return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value); // eslint-disable-line
-};
-
 export function isEmpty(value) {
   if (isUndefined(value) || value === null || value === false || value === 0) {
     return true;
@@ -85,23 +81,3 @@ export function isString(value) {
 export function isUndefined(value) {
   return typeof value === 'undefined';
 };
-
-export const domready = (function() {
-
-  const fns = [];
-  const doc = typeof document === 'object' && document;
-  const hack = doc && doc.documentElement.doScroll;
-  const loaded = doc && (hack ? /^loaded|^c/ : /^loaded|^i|^c/).test(doc.readyState);
-  let listener;
-
-  if (!loaded && doc) {
-    doc.addEventListener('DOMContentLoaded', listener = function() {
-      doc.removeEventListener('DOMContentLoaded', listener);
-      while (listener = fns.shift()) listener()
-      loaded = true
-    });
-  }
-
-  return fn => loaded ? setTimeout(fn, 0) : fns.push(fn);
-
-})();

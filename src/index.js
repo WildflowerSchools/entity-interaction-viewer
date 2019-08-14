@@ -1,8 +1,19 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { domready, isObject, isString } from './utils';
+import domready from 'domready'
+import { isObject, isString } from './utils';
 import Providers from './context';
 import App from './components/App';
+
+const defaults = {
+  target: null,
+  prefix: 'wfs-',
+  breakpoints: {
+    sm: 400,
+    md: 600,
+    lg: 800
+  }
+};
 
 domready(() => {
 
@@ -11,7 +22,7 @@ domready(() => {
     return;
   }
 
-  const options = window.wildflower.o;
+  const options = Object.assign({}, defaults, window.wildflower.o);
   const container = document.createElement('div');
   container.id = 'wildflower';
 
@@ -26,7 +37,7 @@ domready(() => {
 
   const app = (
     <Providers>
-      <App />
+      <App breakpoints={options.breakpoints} />
     </Providers>
   );
 

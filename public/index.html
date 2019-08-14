@@ -27,39 +27,10 @@
     p {
         margin: 0 0 1.5em 0;
     }
-    p:last-child {
-        margin-bottom: 0;
-    }
-    code {
-        font-weight: bold;
-        background: #555;
-        color: #FFF;
-        padding: 3px 5px;
-        border-radius: 3px;
-    }
     .container {
         max-width: 900px;
-        margin-left: auto;
-        margin-right: auto;
-        padding-left: 1em;
-        padding-right: 1em;
-    }
-    .content {
-        padding-top: 2em;
-        padding-bottom: 2em;
-    }
-    #sidebar {
-        position: absolute;
-        left: 2em;
-        right: 2em;
-        bottom: 2em;
-        padding: 2em;
-        border-radius: 0.5em;
-        background-color: #DDD;
-    }
-
-    @media (min-width: 768px) {
-        #sidebar { width: 50%; }
+        margin: 0 auto;
+        padding: 2em 1em;
     }
 
     </style>
@@ -69,23 +40,15 @@
 
 <div class="container">
 
-    <main class="content">
+    <!-- <h1>Lorem Ipsum Dolor</h1>
+    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> -->
 
-        <!-- <h1>Lorem Ipsum Dolor</h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p> -->
-
-        <script async src="/bundle.js"></script>
-        <script>
-        function wildflower(o) { wildflower.o = o || {}; };
-        wildflower();
-        // wildflower({target: '#sidebar'});
-        </script>
-
-    </main>
-
-    <!-- <aside id="sidebar">
-        <p>Render the app inside this element by passing <code>target: '#sidebar'</code> into the init options.</p>
-    </aside> -->
+    <script async src="/bundle.js"></script>
+    <script>
+    function wildflower(o) { wildflower.o = o || {}; };
+    wildflower();
+    // wildflower({target: '#sidebar'});
+    </script>
 
 </div>
 

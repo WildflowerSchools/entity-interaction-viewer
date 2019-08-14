@@ -2,15 +2,12 @@ import { useLayoutEffect } from 'react';
 
 export default function useBreakpoints(ref, breakpoints) {
 
-  // sort provided breakpoints by width as [key, value] pairs,
-  // which may be in an arbitrary order if coming from embed options
+  const regex = new RegExp(/(wfs-size-)[.\S]+/, 'g');
+
+  // convert breakpoints to an array of [key, value] pairs, sorted by width
   breakpoints = Object.keys(breakpoints)
     .map(key => [key, breakpoints[key]])
     .sort((a, b) => b[1] - a[1]);
-
-  // regular expression to match app element className against,
-  // just in case the host page added additional classes for whatever reason
-  const regex = new RegExp(/(wfs-size-)[.\S]+/, 'g');
 
   function getCurrentBreakpoint(width) {
     const breakpoint = breakpoints.find(b => width >= b[1]);
@@ -20,7 +17,7 @@ export default function useBreakpoints(ref, breakpoints) {
   useLayoutEffect(() => {
 
     function resize() {
-      const el = ref.current.parentElement;
+      const el = ref.current;
       const className = `wfs-size-${getCurrentBreakpoint(el.offsetWidth)}`;
       if (el.classList.contains(className)) return;
 
