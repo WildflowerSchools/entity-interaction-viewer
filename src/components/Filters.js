@@ -4,6 +4,7 @@ import DayPickerInput from 'react-day-picker/DayPickerInput';
 import Field from './Field';
 import Button from './Button';
 import Select from './Select';
+import charts from '../charts';
 
 const styles = css`
   display: flex;
@@ -61,7 +62,7 @@ function formatDate(date) {
   return `${yyyy}-${mm}-${dd}`;
 }
 
-function Filters({charts, students}) {
+function Filters({students}) {
 
   const [ state, setState ] = useState(initialState);
   const { chart, student, startDate, endDate } = state;
@@ -98,7 +99,7 @@ function Filters({charts, students}) {
   ].concat(students);
 
   return (
-    <div className={styles}>
+    <form className={styles}>
       <div className="wfs-field">
         <label className="wfs-label">Display</label>
         <Select
@@ -150,7 +151,7 @@ function Filters({charts, students}) {
           <path fill="currentColor" fillRule="evenodd" d="M11 19.356c-4.537 0-8.25-3.712-8.25-8.25 0-4.537 3.713-8.25 8.25-8.25 2.269 0 4.331.963 5.775 2.475l-4.4 4.4H22V.106l-3.231 3.232A10.964 10.964 0 0 0 11 .106c-6.05 0-11 4.95-11 11s4.88 11 11 11c5.065 0 9.268-3.383 10.588-8h-2.91c-1.171 3.098-4.196 5.25-7.678 5.25z"/>
         </svg>
       </Button>
-    </div>
+    </form>
   )
 }
 

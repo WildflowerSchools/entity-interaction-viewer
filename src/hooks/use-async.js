@@ -16,11 +16,10 @@ export default function useAsync(fn) {
 
     callback()
       .then(data => {
-        mounted && setState({data, isLoading: false});
+        if (mounted) setState({data, isLoading: false});
       })
       .catch(error => {
-        console.log('error', error)
-        mounted && setState({error, isLoading: false});
+        if (mounted) setState({error, isLoading: false});
       });
 
     return () => (mounted = false);

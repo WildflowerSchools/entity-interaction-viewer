@@ -21,3 +21,4 @@ Builds to `./build` with minification and versioned filename.
 - [ ] replace [react-select](https://github.com/JedWatson/react-select) with custom component (lighter weight, better styling control)
 - [ ] replace [emotion](https://emotion.sh) with injected styles and prefixed classes for easier style overrides when embedded
 - [ ] replace [react-day-picker](http://react-day-picker.js.org/) wtih custom calendar component (or one that supports date and time)
+- [ ] install individual d3 packages vs entire bundle

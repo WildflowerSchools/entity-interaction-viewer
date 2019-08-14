@@ -36,6 +36,24 @@ const styles = css`
     opacity: 1;
     visibility: visible;
   }
+
+  .wfs-chart {
+    position: relative;
+    width: 100%;
+    padding-top: 50%;
+    outline: #F00 1px dotted;
+
+    svg {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+    tspan {
+      user-select: none;
+    }
+  }
 `
 
 function App(props) {

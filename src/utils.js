@@ -89,7 +89,3 @@ export function random(min, max) {
   if(typeof max === 'undefined') max = min || 1, min = 0;
   return min + Math.random() * (max - min);
 };
-
-export function round(value, decimals) {
-  return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
-};

@@ -3,13 +3,7 @@ import { useQuery } from '../context/data';
 import Header from './Header';
 import Footer from './Footer';
 import Filters from './Filters';
-import Chart from '../charts';
-
-const charts = [
-  {value: 'engagement', label: 'Engagement'},
-  {value: 'bar', label: 'Bar Chart'},
-  {value: 'timeline', label: 'Timeline'}
-];
+import Chart from './Chart';
 
 function Dashboard(props) {
 
@@ -25,29 +19,21 @@ function Dashboard(props) {
 
   return (
     <React.Fragment>
+
       <Header />
+
       <Filters
+        students={students}
         // onChartChange={null}
         // onStudentChange={null}
         // onDateChange={null}
-        charts={charts}
-        students={students}
       />
 
       <Chart
         type="engagement"
-        width={650}
-        height={200}
-        data={[
-          {level: 'W', value: 2345},
-          {level: 'GA', value: 4692},
-          {level: 'Wd', value: 4467},
-          {level: 'HA', value: 1128},
-          {level: 'S', value: 500},
-          {level: 'Obs', value: 1258},
-          {level: 'Other', value: 2256},
-          {level: 'GL', value: 9984}
-        ]}
+        width={500}
+        height={400}
+        data={[data[0]]}
       />
 
       <Footer />

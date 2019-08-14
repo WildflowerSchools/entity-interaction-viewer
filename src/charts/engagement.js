@@ -1,47 +1,34 @@
 import * as d3 from 'd3';
-import { round } from '../utils';
+// import { random } from '../utils';
+import { engagements } from './config';
 
-const concentrations = {
-  CONCENTRATION: 'Concentration',
-  DISTRACTED_WORKING: 'Distracted Working',
-  DISORDER: 'Disorder'
-};
+function parse(data) {
 
-const engagements = {
-  GA: 'Group Activity',
-  GL: 'Getting Lesson',
-  HA: 'Horsing Around',
-  Wait: 'Waiting',
-  Wd: 'Wandering',
-  W: 'Working',
-  S: 'Snacking',
-  Obs: 'Observing',
-  Other: 'Other'
-};
+  data = data[0].engagement.reduce((result, d) => {
+    result[d.level] || (result[d.level] = 0)
+    result[d.level]++;
+    return result;
+  }, {});
 
-const interactions = {
-  COMPLETELY: 'Completely',
-  PARTIAL: 'Partial',
-  NOT: 'Not'
-};
+  return Object.entries(data).map(d => ({
+    level: d[0],
+    value: d[1],
+    label: engagements[d[0]].label
+  }));
+}
 
 export default function({svg, data, width, height}) {
 
-  height = Math.min(width, 600)
+  data = parse(data);
+  height = Math.min(width, 500)
 
+  const sum = d3.sum(data, d => d.value);
   const center = {x: width / 2, y: height / 2};
   const radius = Math.min(width, height) / 2.5;
-  const sum = d3.sum(data, d => d.value);
 
-  data = data.map(d => ({
-    ...d,
-    label: engagements[d.level],
-    percent: round(d.value / sum * 100, 2)
-  }));
-
-  const color = d3.scaleOrdinal()
-    .domain(data.map(d => d.percent))
-    .range(d3.quantize(t => d3.interpolateSpectral(t * 0.4 + 0.6), data.length).reverse())
+  // const color = d3.scaleOrdinal()
+  //   .domain(data.map(d => d.level))
+  //   .range(['#F00', '#0F0', '#D5E9E5', '#12882A', '#30DAAB', '#00F'])
 
   const arcs = (d3.pie()
     .value(d => d.value)
@@ -54,22 +41,23 @@ export default function({svg, data, width, height}) {
     .outerRadius(radius - 1)
     .innerRadius(radius * 0.25);
 
-  svg // .attr('viewBox', [-width / 2, -height / 2, width, height])
-    .attr('width', width)
-    .attr('height', height)
+  svg
+    .attr('viewBox', `0 0 ${width} ${height}`)
+    .attr('perserveAspectRatio', 'xMidYMid')
     .append('g')
-    .attr('transform', `translate(${center.x}, ${center.y})`)
-    .selectAll('path')
-    .data(arcs)
-    .join('path')
-      .attr('fill', d => color(d.data.level))
-      .attr('d', arc)
-      .on('mouseover', ({data}) => console.log(data))
-      .on('mousemove', ({data}) => data)
-      .on('mouseout', ({data}) => data)
-      // .on('mouseover', function(){return tooltip.style("visibility", "visible");})
-      // .on('mousemove', function(){return tooltip.style("top", (event.pageY-10)+"px").style("left",(event.pageX+10)+"px");})
-      // .on('mouseout', function(){return tooltip.style("visibility", "hidden");})
+      .attr('transform', `translate(${center.x}, ${center.y})`)
+      .selectAll('path')
+      .data(arcs)
+      .join('path')
+        .attr('d', arc)
+        .attr('fill', d => engagements[d.data.level].color)
+        // .attr('fill', d => color(d.data.level))
+        .on('mouseover', ({data}) => console.log(data))
+        .on('mousemove', ({data}) => data)
+        .on('mouseout',  ({data}) => data)
+        // .on('mouseover', function() { return tooltip.style('visibility', 'visible'); })
+        // .on('mousemove', function() { return tooltip.style('top', (event.pageY-10)+'px').style('left',(event.pageX+10)+'px'); })
+        // .on('mouseout',  function() { return tooltip.style('visibility', 'hidden'); })
 
   svg.append('g')
     .attr('transform', `translate(${center.x}, ${center.y})`)
@@ -88,6 +76,7 @@ export default function({svg, data, width, height}) {
         .attr('x', 0)
         .attr('y', '1em')
         .attr('fill-opacity', 0.5)
-        .text(d => `${d.data.percent}%`)
+        .text(d => d3.format(',.2%')(d.value / sum))
+        // .text(d => `${d.data.percent}%`)
       );
 };
