@@ -81,3 +81,15 @@ export function isString(value) {
 export function isUndefined(value) {
   return typeof value === 'undefined';
 };
+
+export function random(min, max) {
+  if(arguments.length === 0) return Math.random();
+  if(Array.isArray(min)) return min[ Math.floor(Math.random() * min.length) ];
+  if(typeof min === 'undefined') min = 1;
+  if(typeof max === 'undefined') max = min || 1, min = 0;
+  return min + Math.random() * (max - min);
+};
+
+export function round(value, decimals) {
+  return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals);
+};

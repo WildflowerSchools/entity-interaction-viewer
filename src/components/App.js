@@ -5,30 +5,6 @@ import { useBreakpoints } from '../hooks';
 import Dashboard from './Dashboard';
 import Login from './Login';
 
-// const concentrations = {
-//   CONCENTRATION: 'Concentration',
-//   DISTRACTED_WORKING: 'Distracted Working',
-//   DISORDER: 'Disorder'
-// };
-
-// const engagements = {
-//   GA: 'Group Activity',
-//   GL: 'Getting Lesson',
-//   HA: 'Horsing Around',
-//   Wait: 'Waiting',
-//   Wd: 'Wandering',
-//   W: 'Working',
-//   S: 'Snacking',
-//   Obs: 'Observing',
-//   Other: 'Other'
-// };
-
-// const interactions = {
-//   COMPLETELY: 'Completely',
-//   PARTIAL: 'Partial',
-//   NOT: 'Not'
-// };
-
 const styles = css`
   font-size: 16px;
   max-width: 100%;

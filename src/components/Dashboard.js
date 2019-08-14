@@ -39,14 +39,14 @@ function Dashboard(props) {
         width={650}
         height={200}
         data={[
-          {name: 'W', value: 2345, percent: 0.2},
-          {name: 'GA', value: 4692, percent: 0.2},
-          {name: 'Wd', value: 4467, percent: 0.2},
-          {name: 'HA', value: 1128, percent: 0.2},
-          {name: 'S', value: 9984, percent: 0.2},
-          {name: 'Obs', value: 1258, percent: 0.2},
-          {name: 'Other', value: 2256, percent: 0.2},
-          {name: 'GL', value: 900, percent: 0.2}
+          {level: 'W', value: 2345},
+          {level: 'GA', value: 4692},
+          {level: 'Wd', value: 4467},
+          {level: 'HA', value: 1128},
+          {level: 'S', value: 500},
+          {level: 'Obs', value: 1258},
+          {level: 'Other', value: 2256},
+          {level: 'GL', value: 9984}
         ]}
       />
 
