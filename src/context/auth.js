@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
-import { useAsync } from 'react-async';
+// import { useAsync } from 'react-async';
 // import { WebAuth } from 'auth0-js';
 import { isEmpty } from '../utils';
+import { useAsync } from '../hooks';
 
 // const auth0 = new WebAuth({
 //   clientID: process.env.AUTH0_CLIENT,
@@ -26,11 +27,27 @@ const Context = React.createContext();
 
 function AuthProvider(props) {
 
+  // const {
+  //   data,
+  //   error,
+  //   isLoading,
+  //   isRejected,
+  //   setData
+  // } = useAsync(init);
+
+  // if (isLoading) {
+  //   return <div>loading...</div>
+  // }
+
+  // if (isRejected) {
+  //   // TODO: caputure exception in sentry?
+  //   return <div>{window.debug(error)}</div>
+  // }
+
   const {
     data,
     error,
     isLoading,
-    isRejected,
     setData
   } = useAsync(init);
 
@@ -38,7 +55,7 @@ function AuthProvider(props) {
     return <div>loading...</div>
   }
 
-  if (isRejected) {
+  if (error) {
     // TODO: caputure exception in sentry?
     return <div>{window.debug(error)}</div>
   }
@@ -48,7 +65,6 @@ function AuthProvider(props) {
     return new Promise((resolve, reject) => {
       const delay = 200 + Math.random() * 1800;
       setTimeout(() => {
-        // return reject();
         localStorage.setItem('token', Math.random());
         setData(true);
         resolve();
