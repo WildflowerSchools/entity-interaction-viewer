@@ -2,12 +2,12 @@ import React, { useState, useMemo } from 'react';
 import { useQuery } from '../context/data';
 // import Footer from './Footer';
 import Filters from './Filters';
-import charts from '../charts';
+import charts, { config } from '../charts';
 import { isEmpty, noop } from '../utils';
 
 const initialState = {
-  chart: 'engagement',
-  student: 'p0006',
+  chart: '',
+  student: '',
   startDate: '',
   endDate: ''
 };
@@ -65,34 +65,7 @@ function Dashboard(props) {
         data={[data[0]]}
       /> */}
       {/* <Footer /> */}
-      <hr />
-      <h2>Concentration</h2>
-      {window.debug([... new Set(data[0].concentration.map(item => item.level).filter(item => item !== ''))])}
-      <hr />
-      <h2>Engagement</h2>
-      {window.debug([... new Set(data[0].engagement.map(item => item.level).filter(item => item !== ''))])}
-      <ul>
-        <li>W = Working</li>
-        <li>GL = Getting Lesson</li>
-        <li>GA = Doing Group Activity</li>
-        <li>HA = Horsing Around</li>
-        <li>Wait = Waiting</li>
-        <li>Wd = Wandering</li>
-        <li>S = Snacking</li>
-        <li>Obs = Observing</li>
-        <li>Other = Other</li>
-      </ul>
-      <hr />
-      <h2>Interactions</h2>
-      {window.debug(data[0].interactions.slice(0, 2).concat(data[0].interactions.slice(-2)))}
-      <ul>
-        <li>oriented towards the material</li>
-        <li>looking at the material</li>
-        <li>touching the material</li>
-        <li>distracted</li>
-        <li>performing intentional actions</li>
-        <li>performing careful and slow actions</li>
-      </ul>
+      {window.debug(config)}
     </React.Fragment>
   );
 }

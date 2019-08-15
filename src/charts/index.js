@@ -84,6 +84,7 @@ function Concentration({data}) {
   }, {});
 
   data = Object.entries(data).map(d => ({
+    // TODO: need to fail silently when a config key isn't found!
     label: config.concentrations[d[0]].label,
     level: d[0],
     value: d[1],
@@ -112,6 +113,8 @@ function Engagement({data}) {
   }, {});
 
   data = Object.entries(data).map(d => ({
+    // TODO: need to fail silently when a config key isn't found!
+    // getConcentration(key) ... getConcentration()
     label: config.engagements[d[0]].label,
     level: d[0],
     value: d[1],
@@ -127,9 +130,11 @@ function Engagement({data}) {
   )
 }
 
+export {config};
+
 export default [{
-  label: 'Activities / Behaviors / Levels',
-  value: 'activities-interactions',
+  label: 'Interactions by Activity',
+  value: 'interactions-by-activity',
   component: Interactions
 }, {
   label: 'Concentration',
