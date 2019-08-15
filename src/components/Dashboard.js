@@ -1,14 +1,38 @@
 import React, { useState, useMemo } from 'react';
 import { useQuery } from '../context/data';
-import Header from './Header';
-import Footer from './Footer';
+// import Footer from './Footer';
 import Filters from './Filters';
-import Chart from './Chart';
+import charts from '../charts';
+import { isEmpty, noop } from '../utils';
+
+const initialState = {
+  chart: 'engagement',
+  student: 'p0006',
+  startDate: '',
+  endDate: ''
+};
 
 function Dashboard(props) {
 
-  // const [ state, setState ] = useState({});
+  const [ state, setState ] = useState(initialState);
+  const { chart, student, startDate, endDate } = state;
   const { data } = useQuery('TODO');
+
+  function onChartChange(value) {
+    setState(state => ({...state, chart: value}));
+  }
+
+  function onStudentChange(value) {
+    setState(state => ({...state, student: value}));
+  }
+
+  function onStartDateChange(date) {
+    setState(state => ({...state, startDate: date}));
+  }
+
+  function onEndDateChange(date) {
+    setState(state => ({...state, endDate: date}));
+  }
 
   const students = useMemo(() => {
     return data.map(entry => ({
@@ -17,27 +41,30 @@ function Dashboard(props) {
     })).sort((a, b) => a.label < b.label ? -1 : 1)
   }, []);
 
+  const Chart = !isEmpty(chart) ? charts.find(c => c.value === chart).component : noop;
+
   return (
     <React.Fragment>
-
-      <Header />
-
       <Filters
+        charts={charts}
         students={students}
-        // onChartChange={null}
-        // onStudentChange={null}
-        // onDateChange={null}
+        chart={chart}
+        student={student}
+        startDate={startDate}
+        endDate={endDate}
+        onChartChange={onChartChange}
+        onStudentChange={onStudentChange}
+        onStartDateChange={onStartDateChange}
+        onEndDateChange={onEndDateChange}
       />
-
-      <Chart
+      {student && <Chart data={data.find(d => d.person_id === student)} />}
+      {/* <Chart
         type="engagement"
         width={500}
         height={400}
         data={[data[0]]}
-      />
-
-      <Footer />
-
+      /> */}
+      {/* <Footer /> */}
       <hr />
       <h2>Concentration</h2>
       {window.debug([... new Set(data[0].concentration.map(item => item.level).filter(item => item !== ''))])}
@@ -66,7 +93,6 @@ function Dashboard(props) {
         <li>performing intentional actions</li>
         <li>performing careful and slow actions</li>
       </ul>
-
     </React.Fragment>
   );
 }

@@ -4,7 +4,7 @@ window.debug = process.env.NODE_ENV === 'development' ? (vars, styles = {}) => (
   <pre style={{maxWidth:'100%',fontSize:13,overflow:'scroll', ...styles}}>{JSON.stringify(vars, null, 2)}</pre>
 ) : vars => null;
 
-export const noop = fn => fn;
+export const noop = fn => null;
 export const isArray = Array.isArray;
 export const toArray = Array.from;
 

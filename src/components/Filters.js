@@ -1,10 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { css } from 'emotion';
 import DayPickerInput from 'react-day-picker/DayPickerInput';
-import Field from './Field';
 import Button from './Button';
 import Select from './Select';
-import charts from '../charts';
 
 const styles = css`
   display: flex;
@@ -48,13 +46,6 @@ const styles = css`
   }
 `
 
-const initialState = {
-  chart: '',
-  student: '',
-  startDate: undefined,
-  endDate: undefined
-};
-
 function formatDate(date) {
   const yyyy = date.getFullYear();
   const mm = String(date.getMonth() + 1).padStart(2, '0');
@@ -62,41 +53,37 @@ function formatDate(date) {
   return `${yyyy}-${mm}-${dd}`;
 }
 
-function Filters({students}) {
-
-  const [ state, setState ] = useState(initialState);
-  const { chart, student, startDate, endDate } = state;
+function Filters({
+  charts,
+  students,
+  chart,
+  student,
+  startDate,
+  endDate,
+  onChartChange,
+  onStudentChange,
+  onStartDateChange,
+  onEndDateChange
+}) {
 
   const endRef = useRef();
   const today = new Date();
 
-  function onChartChange(value) {
-    setState(state => ({...state, chart: value}));
-  }
+  const chartOptions = [
+    {value: null, label: '-- Select --'}
+  ].concat(charts);
 
-  function onStudentChange(value) {
-    setState(state => ({...state, student: value}));
-  }
+  const studentOptions = [
+    {value: null, label: '-- Select --'}
+  ].concat(students);
 
-  function onStartDateChange(date) {
-    setState(state => ({...state, startDate: date}));
-  }
-
-  function onEndDateChange(date) {
-    setState(state => ({...state, endDate: date}));
-  }
-
-  function reset() {
-    setState(initialState);
-  }
+  // function reset() {
+  //   setState(initialState);
+  // }
 
   function refresh() {
-    alert(JSON.stringify(state));
+    alert(JSON.stringify({chart, student, startDate, endDate}));
   }
-
-  students = [
-    {value: null, label: 'All Students'}
-  ].concat(students);
 
   return (
     <form className={styles}>
@@ -104,18 +91,20 @@ function Filters({students}) {
         <label className="wfs-label">Display</label>
         <Select
           value={chart}
-          options={charts}
+          options={chartOptions}
           onChange={onChartChange}
         />
       </div>
-      <Field label="Student">
+      <div className="wfs-field">
+        <label className="wfs-label">Student</label>
         <Select
           value={student}
-          options={students}
+          options={studentOptions}
           onChange={onStudentChange}
         />
-      </Field>
-      <Field label="Time Frame">
+      </div>
+      <div className="wfs-field">
+        <label className="wfs-label">Time Frame</label>
         <DayPickerInput
           value={startDate}
           formatDate={formatDate}
@@ -136,7 +125,7 @@ function Filters({students}) {
           placeholder="End Date"
           onDayChange={onEndDateChange}
           dayPickerProps={{
-            fromMonth: startDate,
+            fromMonth: startDate || null,
             toMonth: today,
             month: startDate,
             modifiers: {start: startDate, end: endDate},
@@ -144,7 +133,7 @@ function Filters({students}) {
             disabledDays: {before: startDate, after: today}
           }}
         />
-      </Field>
+      </div>
       <Button onClick={refresh}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
           <title>Refresh</title>

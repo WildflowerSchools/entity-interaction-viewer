@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-// import { useAsync } from 'react-async';
 // import { WebAuth } from 'auth0-js';
 import { isEmpty } from '../utils';
 import { useAsync } from '../hooks';
@@ -26,23 +25,6 @@ async function init() {
 const Context = React.createContext();
 
 function AuthProvider(props) {
-
-  // const {
-  //   data,
-  //   error,
-  //   isLoading,
-  //   isRejected,
-  //   setData
-  // } = useAsync(init);
-
-  // if (isLoading) {
-  //   return <div>loading...</div>
-  // }
-
-  // if (isRejected) {
-  //   // TODO: caputure exception in sentry?
-  //   return <div>{window.debug(error)}</div>
-  // }
 
   const {
     data,

@@ -7,7 +7,7 @@ function Footer(props) {
 
   return (
     <div className="wfs-footer">
-      Concentration, Engagement and Interaction reporting by <a href="https://wildflowerschools.org/" target="_blank">Wildflower Schools</a>
+      reporting by <a href="https://wildflowerschools.org/" target="_blank">Wildflower Schools</a>
       &nbsp;&nbsp;&bull;&nbsp;&nbsp;
       <a href="#" onClick={logout}>Logout</a>
     </div>

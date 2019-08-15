@@ -7,6 +7,7 @@ import Login from './Login';
 
 const styles = css`
   font-size: 16px;
+  font-family: -apple-system, sans-serif;
   max-width: 100%;
 
   * {
@@ -20,6 +21,14 @@ const styles = css`
       color: #0E928A;
       text-decoration: underline;
     }
+  }
+  hr {
+    margin: 1.5em 0;
+  }
+  .wfs-label {
+    display: block;
+    font-size: 0.9375em;
+    color: #666;
   }
   .wfs-footer {
     font-size: 0.8125em;

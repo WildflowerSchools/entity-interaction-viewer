@@ -52,12 +52,9 @@ export default function({svg, data, width, height}) {
         .attr('d', arc)
         .attr('fill', d => engagements[d.data.level].color)
         // .attr('fill', d => color(d.data.level))
-        .on('mouseover', ({data}) => console.log(data))
-        .on('mousemove', ({data}) => data)
-        .on('mouseout',  ({data}) => data)
-        // .on('mouseover', function() { return tooltip.style('visibility', 'visible'); })
-        // .on('mousemove', function() { return tooltip.style('top', (event.pageY-10)+'px').style('left',(event.pageX+10)+'px'); })
-        // .on('mouseout',  function() { return tooltip.style('visibility', 'hidden'); })
+        // .on('mouseover', ({data}) => data)
+        // .on('mousemove', ({data}) => data)
+        // .on('mouseout',  ({data}) => data)
 
   svg.append('g')
     .attr('transform', `translate(${center.x}, ${center.y})`)
@@ -77,6 +74,5 @@ export default function({svg, data, width, height}) {
         .attr('y', '1em')
         .attr('fill-opacity', 0.5)
         .text(d => d3.format(',.2%')(d.value / sum))
-        // .text(d => `${d.data.percent}%`)
       );
 };

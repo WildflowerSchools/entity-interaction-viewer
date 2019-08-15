@@ -1,4 +1,9 @@
 
+const NO_DATA = {
+  label: 'No Data',
+  color: '#CCCCCCC'
+};
+
 export const concentrations = {
   CONCENTRATION: {
     label: 'Concentration'
@@ -8,7 +13,8 @@ export const concentrations = {
   },
   DISORDER: {
     label: 'Disorder'
-  }
+  },
+  NO_DATA
 };
 
 export const engagements = {
@@ -32,6 +38,14 @@ export const engagements = {
     label: 'Wandering',
     color: '#52FFEE'
   },
+  Br: {
+    label: 'TODO: What is this?',
+    color: '#FF0000'
+  },
+  OS: {
+    label: 'Out of Sight',
+    color: '#C0FFEE'
+  },
   W: {
     label: 'Working',
     color: '#4FB477'
@@ -47,17 +61,38 @@ export const engagements = {
   Other: {
     label: 'Other',
     color: '#BA2C73'
-  }
+  },
+  NO_DATA
 };
 
 export const interactions = {
-  COMPLETELY: {
-    label: 'Completely'
+  behaviors: {
+    orientated: {},
+    looking: {},
+    touching: {},
+    distracted: {},
+    intentional: {},
+    careful: {}
   },
-  PARTIAL: {
-    label: 'Partial'
-  },
-  NOT: {
-    label: 'Not'
+  levels: {
+    COMPLETELY: {
+      label: 'Completely',
+      color: '#00FF00'
+    },
+    PARTIAL: {
+      label: 'Partial',
+      color: '#FFFF00'
+    },
+    NOT: {
+      label: 'NOT',
+      color: '#FF0000'
+    },
+    NO_DATA
   }
+};
+
+export default {
+  concentrations,
+  engagements,
+  interactions
 };
