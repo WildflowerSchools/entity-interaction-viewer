@@ -38,7 +38,7 @@ export const engagements = {
     label: 'Wandering',
     color: '#52FFEE'
   },
-  Br: {
+  BR: {
     label: 'TODO: What is this?',
     color: '#FF0000'
   },

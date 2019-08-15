@@ -102,29 +102,27 @@ function Concentration({data}) {
 function Engagement({data}) {
 
   const total = data.engagement.length;
-  const levels = pluck('level')(data.engagement);
 
-  // data = data.engagement.reduce((result, d) => {
-  //   let key = d.level;
-  //   if (isEmpty(key)) key = 'NO_DATA';
-  //   result[key] || (result[key] = 0);
-  //   result[key]++;
-  //   return result;
-  // }, {});
+  data = data.engagement.reduce((result, d) => {
+    let key = d.level;
+    if (isEmpty(key)) key = 'NO_DATA';
+    result[key] || (result[key] = 0);
+    result[key]++;
+    return result;
+  }, {});
 
-  // data = Object.entries(data).map(d => ({
-  //   label: config.engagements[d[0]].label,
-  //   level: d[0],
-  //   value: d[1],
-  //   display: `${d[1]} minutes`,
-  //   percent: d[1] / total
-  // }));
+  data = Object.entries(data).map(d => ({
+    label: config.engagements[d[0]].label,
+    level: d[0],
+    value: d[1],
+    display: `${d[1]} minutes`,
+    percent: d[1] / total
+  }));
 
   return (
     <div>
-      {window.debug(levels)}
-      {/* <code>Engagement breakdown over {total} minutes</code>
-      {window.debug(data)} */}
+      <code>Engagement breakdown over {total} minutes</code>
+      {window.debug(data)}
     </div>
   )
 }
