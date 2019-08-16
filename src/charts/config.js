@@ -86,8 +86,7 @@ export const interactions = {
     NOT: {
       label: 'NOT',
       color: '#FF0000'
-    },
-    NO_DATA
+    }
   }
 };
 

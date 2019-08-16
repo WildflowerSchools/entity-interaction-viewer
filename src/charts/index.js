@@ -6,7 +6,11 @@ import config from './config';
 
 function pluck(key) {
   return array => Array.from(new Set(array.map(o => o[key])));
-};
+}
+
+function clone(obj) {
+  return Object.assign({}, obj);
+}
 // const activities = pluck('activity')(data.interactions).filter(s => !isEmpty(s));
 // import engagement from './engagement';
 // export default [{
@@ -21,14 +25,6 @@ function pluck(key) {
 
 function Interactions({data}) {
 
-  function createBehaviors() {
-    return Object.assign({}, behaviorsObject);
-  }
-
-  function createLevels() {
-    return Object.assign({}, levelsObject);
-  }
-
   const levels = Object.keys(config.interactions.levels);
   const behaviors = Object.keys(config.interactions.behaviors);
 
@@ -38,7 +34,7 @@ function Interactions({data}) {
   }, {});
 
   const behaviorsObject = behaviors.reduce((result, key) => {
-    result[key] = createLevels();
+    result[key] = clone(levelsObject);
     return result;
   }, {});
 
@@ -46,11 +42,11 @@ function Interactions({data}) {
 
     const key = row.activity.trim();
     if (isEmpty(key)) return result;
+    const activity = result[key] || (result[key] = clone(behaviorsObject));
 
-    const activity = result[key] || (result[key] = createBehaviors());
-
-    Object.keys(row).forEach(key => {
-      if (behaviors.includes(key)) activity[key][row[key]]++;
+    behaviors.forEach(behavior => {
+      const level = row[behavior];
+      if (!isEmpty(level)) activity[behavior][level]++;
     });
 
     return result;

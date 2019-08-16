@@ -6,8 +6,8 @@ import charts, { config } from '../charts';
 import { isEmpty, noop } from '../utils';
 
 const initialState = {
-  chart: '',
-  student: '',
+  chart: 'interactions-by-activity',
+  student: 'p0008',
   startDate: '',
   endDate: ''
 };
@@ -65,6 +65,7 @@ function Dashboard(props) {
         data={[data[0]]}
       /> */}
       {/* <Footer /> */}
+      <hr />
       {window.debug(config)}
     </React.Fragment>
   );
