@@ -6,7 +6,7 @@ import charts, { config } from '../charts';
 import { isEmpty, noop } from '../utils';
 
 const initialState = {
-  chart: 'interactions-by-activity',
+  chart: 'interactions',
   student: 'p0008',
   startDate: '',
   endDate: ''

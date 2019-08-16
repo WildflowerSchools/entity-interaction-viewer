@@ -11821,7 +11821,7 @@
             },
             {
                 "activity": "Easel",
-                "orientated": "NOT",
+                "orientated": "COMPLETELY",
                 "looking": "NOT",
                 "touching": "NOT",
                 "distracted": "COMPLETELY",

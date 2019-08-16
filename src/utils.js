@@ -82,6 +82,14 @@ export function isUndefined(value) {
   return typeof value === 'undefined';
 };
 
+export function pluck(key) {
+  return array => Array.from(new Set(array.map(o => o[key])));
+};
+
+export function clone(source) {
+  return Object.assign({}, source);
+};
+
 export function random(min, max) {
   if(arguments.length === 0) return Math.random();
   if(Array.isArray(min)) return min[ Math.floor(Math.random() * min.length) ];
