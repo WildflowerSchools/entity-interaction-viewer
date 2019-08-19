@@ -1,12 +1,12 @@
 import React, { useState, useMemo } from 'react';
 import { useQuery } from '../context/data';
-// import Footer from './Footer';
+import Footer from './Footer';
 import Filters from './Filters';
 import charts, { config } from '../charts';
 import { isEmpty, noop } from '../utils';
 
 const initialState = {
-  chart: 'interactions',
+  chart: 'activities',
   student: 'p0008',
   startDate: '',
   endDate: ''
@@ -36,9 +36,9 @@ function Dashboard(props) {
 
   const students = useMemo(() => {
     return data.map(entry => ({
-      value: entry.person_id,
-      label: entry.name
-    })).sort((a, b) => a.label < b.label ? -1 : 1)
+      id: entry.person_id,
+      name: entry.name
+    })).sort((a, b) => a.name < b.name ? -1 : 1)
   }, []);
 
   const Chart = !isEmpty(chart) ? charts.find(c => c.value === chart).component : noop;
@@ -57,14 +57,18 @@ function Dashboard(props) {
         onStartDateChange={onStartDateChange}
         onEndDateChange={onEndDateChange}
       />
-      {student && <Chart data={data.find(d => d.person_id === student)} />}
+      {student && <Chart
+        student={students.find(s => s.id === student)}
+        data={data.find(d => d.person_id === student)}
+      />}
+
       {/* <Chart
         type="engagement"
         width={500}
         height={400}
         data={[data[0]]}
       /> */}
-      {/* <Footer /> */}
+      <Footer />
       <hr />
       {window.debug(config)}
     </React.Fragment>

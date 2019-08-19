@@ -39,7 +39,7 @@ export const engagements = {
     color: '#52FFEE'
   },
   BR: {
-    label: 'TODO: What is this?',
+    label: 'Bathroom',
     color: '#FF0000'
   },
   OS: {

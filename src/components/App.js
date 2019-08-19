@@ -27,41 +27,19 @@ const styles = css`
   }
   .wfs-label {
     display: block;
-    font-size: 0.9375em;
-    color: #666;
+    margin: 0 0 0.25em 2px;
+    font-size: 0.8125em;
+    color: #808080;
   }
   .wfs-footer {
     font-size: 0.8125em;
     color: #808080;
   }
   .wfs-tooltip {
-    position: absolute;
-    z-index: 10;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.2s;
+    font-size: 0.8125em;
   }
-  .wfs-tooltip.active {
-    opacity: 1;
-    visibility: visible;
-  }
-
   .wfs-chart {
-    position: relative;
-    width: 100%;
-    padding-top: 50%;
-    outline: #F00 1px dotted;
-
-    svg {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-    }
-    tspan {
-      user-select: none;
-    }
+    margin: 1.5em 0;
   }
 `
 

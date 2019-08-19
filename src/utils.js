@@ -97,3 +97,9 @@ export function random(min, max) {
   if(typeof max === 'undefined') max = min || 1, min = 0;
   return min + Math.random() * (max - min);
 };
+
+export function toTitleCase(s) {
+  return s.split(' ').map(word => {
+    return word.startsWith('iP') ? word : word.charAt(0).toUpperCase() + word.slice(1)
+  }).join(' ');
+};

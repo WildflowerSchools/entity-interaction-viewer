@@ -8,6 +8,7 @@ const styles = css`
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
+  margin-bottom: 1.5em;
 
   ${require('react-day-picker/lib/style.css').toString()}
 
@@ -15,7 +16,6 @@ const styles = css`
     flex: 1 0 auto;
     margin-right: 0.9375em;
   }
-
   .DayPickerInput input {
     font-size: 1em;
     height: 40px;
@@ -39,10 +39,6 @@ const styles = css`
     color: #069A91 !important;
     background-color: rgba(35,181,173,0.1) !important;
     font-weight: 400;
-  }
-
-  button svg {
-    width: 22px;
   }
 `
 
@@ -75,11 +71,7 @@ function Filters({
 
   const studentOptions = [
     {value: null, label: '-- Select --'}
-  ].concat(students);
-
-  // function reset() {
-  //   setState(initialState);
-  // }
+  ].concat(students.map(s => ({value: s.id, label: s.name})));
 
   function refresh() {
     alert(JSON.stringify({chart, student, startDate, endDate}));
@@ -103,7 +95,7 @@ function Filters({
           onChange={onStudentChange}
         />
       </div>
-      <div className="wfs-field">
+      <div className="wfs-field wfs-field-date">
         <label className="wfs-label">Time Frame</label>
         <DayPickerInput
           value={startDate}
@@ -134,12 +126,12 @@ function Filters({
           }}
         />
       </div>
-      <Button onClick={refresh}>
+      {/* <Button onClick={refresh}>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
           <title>Refresh</title>
           <path fill="currentColor" fillRule="evenodd" d="M11 19.356c-4.537 0-8.25-3.712-8.25-8.25 0-4.537 3.713-8.25 8.25-8.25 2.269 0 4.331.963 5.775 2.475l-4.4 4.4H22V.106l-3.231 3.232A10.964 10.964 0 0 0 11 .106c-6.05 0-11 4.95-11 11s4.88 11 11 11c5.065 0 9.268-3.383 10.588-8h-2.91c-1.171 3.098-4.196 5.25-7.678 5.25z"/>
         </svg>
-      </Button>
+      </Button> */}
     </form>
   )
 }
