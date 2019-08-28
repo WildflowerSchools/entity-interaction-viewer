@@ -12,10 +12,9 @@
     "@nivo/bar": "^0.59.2",
     "@nivo/pie": "^0.59.1",
     "auth0-js": "^9.11.3",
-    "d3": "^5.9.7",
     "domready": "^1.0.8",
     "emotion": "^10.0.14",
-    "graphql-hooks": "^3.6.1",
+    "graphql-hooks": "^4.0.0",
     "react": "^16.9.0",
     "react-day-picker": "^7.3.2",
     "react-dom": "^16.9.0"
@@ -26,12 +25,12 @@
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.2.0",
-    "dotenv": "^8.0.0",
-    "error-overlay-webpack-plugin": "^0.4.0",
+    "dotenv": "^8.1.0",
+    "error-overlay-webpack-plugin": "^0.4.1",
     "terser-webpack-plugin": "^1.4.1",
     "to-string-loader": "^1.1.5",
-    "webpack": "^4.39.2",
-    "webpack-cli": "^3.3.6",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.7",
     "webpack-dev-server": "^3.8.0"
   }
 }
