@@ -1,5 +1,5 @@
 import React from 'react';
-import { noop } from '../utils';
+import { isEmpty, noop } from '../utils';
 
 function Select(props) {
 
@@ -13,7 +13,7 @@ function Select(props) {
   ))
 
   return (
-    <select className="wfs-select" value={props.value} onChange={onChange}>
+    <select value={props.value} onChange={onChange} className={`wfs-select${isEmpty(props.value) ? ' wfs-select-empty' : ''}`}>
       {options}
     </select>
   );
