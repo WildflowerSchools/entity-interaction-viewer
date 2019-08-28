@@ -1,30 +1,26 @@
 import React from 'react';
-import Activities from './Activities';
+import ActivitiesBar from './ActivitiesBar';
+import ActivitiesTimeline from './ActivitiesTimeline';
+import AllocationPie from './AllocationPie';
 import Interactions from './Interactions';
-import Timeline from './Timeline';
-import PieChart from './PieChart';
 import config from './config';
 
 export { config };
 
+// TODO: rename these to something more descriptive
 export default [{
-  label: 'Time on Activities',
-  value: 'activities',
-  component: Activities
+  name: 'Activities',
+  component: ActivitiesBar
 }, {
-  label: 'Timeline',
-  value: 'timeline',
-  component: Timeline
+  name: 'Timeline',
+  component: ActivitiesTimeline
 }, {
-  label: 'Interactions',
-  value: 'interactions',
+  name: 'Interactions',
   component: Interactions
 }, {
-  label: 'Concentration',
-  value: 'concentration',
-  component: props => <PieChart type="concentration" {...props} />
+  name: 'Concentration',
+  component: props => <AllocationPie type="concentration" {...props} />
 }, {
-  label: 'Engagement',
-  value: 'engagement',
-  component: props => <PieChart type="engagement" {...props} />
+  name: 'Engagement',
+  component: props => <AllocationPie type="engagement" {...props} />
 }];

@@ -6,8 +6,8 @@ import charts from '../charts';
 import { isEmpty } from '../utils';
 
 const initialState = {
-  chart: '',
-  student: '',
+  chart: 'Concentration',
+  student: 'p0008',
   startDate: '',
   endDate: ''
 };
@@ -44,7 +44,7 @@ function Dashboard(props) {
   const hasChart = !isEmpty(chart) && !isEmpty(student);
 
   if (hasChart) {
-    const Chart = charts.find(c => c.value === chart).component;
+    const Chart = charts.find(c => c.name === chart).component;
     content = <Chart data={data.find(d => d.person_id === student)} />
   }
 
@@ -64,6 +64,7 @@ function Dashboard(props) {
       />
       {content}
       <Footer />
+      <hr />
       {window.debug(require('../charts').config)}
     </React.Fragment>
   );

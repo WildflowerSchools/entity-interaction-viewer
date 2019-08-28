@@ -34,10 +34,16 @@ export default css`
     align-items: flex-end;
     justify-content: space-between;
     margin-bottom: 1.5em;
+
+    > * + * {
+      margin-left: 15px;
+    }
   }
   .wfs-field {
     flex: 1 0 auto;
-    margin-right: 0.9375em;
+  }
+  .wfs-field-date {
+    width: 400px;
   }
   .wfs-label {
     display: block;
@@ -116,24 +122,9 @@ export default css`
   /* https://github.com/gpbl/react-day-picker/blob/master/src/style.css */
   ${require('react-day-picker/lib/style.css').toString()}
 
-  .DayPickerInput-Overlay {
-    margin-top: 1px;
-    border-top: 0;
-    border-radius: 0 0 3px 3px;
-    z-index: 100;
-  }
-  .DayPicker-Caption > div {
-    font-size: 1em;
-    font-weight: 700;
-  }
-  .DayPicker-NavButton {
-    width: 1em;
-    height: 1em;
-    color: ${colors.gray};
-  }
   .DayPickerInput {
     position: relative;
-    max-width: 170px;
+    width: 50%;
     height: 45px;
     border: 1px solid #D9D9D9;
     box-shadow: 0 1px 0 1px rgba(0,0,0,0.04);
@@ -148,7 +139,7 @@ export default css`
       height: 100%;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 21 20'%3E%3Cpath fill='%23${colors.primary.slice(1)}' fill-rule='nonzero' d='M18.3 2.41h-1.92v1.16c0 .2-.18.38-.39.38h-.77a.39.39 0 0 1-.38-.38V2.4H5.6v1.16c0 .2-.18.38-.39.38h-.77a.39.39 0 0 1-.38-.38V2.4H2.15c-1.06 0-1.93.87-1.93 1.93V17.4c0 1.06.87 1.93 1.93 1.93H18.3c1.06 0 1.92-.87 1.92-1.93V4.34c0-1.06-.86-1.93-1.92-1.93zm.38 14.43c0 .53-.43.96-.96.96h-15a.96.96 0 0 1-.96-.96V8.18c0-.2.17-.38.39-.38H18.3c.21 0 .38.17.38.38v8.66zM5.61 1.26a.39.39 0 0 0-.39-.38h-.77a.39.39 0 0 0-.38.38v1.15H5.6V1.26zm10.77 0a.39.39 0 0 0-.39-.38h-.77a.39.39 0 0 0-.38.38v1.15h1.54V1.26z'/%3E%3C/svg%3E");
       background-size: auto 55%;
-      background-position: 0.8em 48%;
+      background-position: 0.9em 48%;
       background-repeat: no-repeat;
       cursor: default;
     }
@@ -167,7 +158,7 @@ export default css`
     input {
       width: 100%;
       height: 100%;
-      padding: 0.75em 1.5em 0.75em 3.125em;
+      padding: 0.75em 1.5em 0.75em 3.25em;
       font-size: 0.9375em;
       font-family: inherit;
       line-height: 1.3;
@@ -183,7 +174,23 @@ export default css`
     input::placeholder               { color: ${colors.gray}; }
   }
 
+  .DayPickerInput-Overlay {
+    margin-top: 1px;
+    border-top: 0;
+    border-radius: 0 0 3px 3px;
+    z-index: 100;
+  }
+  .DayPicker-Caption > div {
+    font-size: 1em;
+    font-weight: 700;
+  }
+  .DayPicker-NavButton {
+    width: 1em;
+    height: 1em;
+    color: ${colors.gray};
+  }
   .DayPicker-Day {
+    font-size: 0.9375em;
     font-weight: 400;
     line-height: 1;
     border-radius: 0;
@@ -213,6 +220,7 @@ export default css`
   .wfs-footer {
     font-size: 0.8125em;
     color: ${colors.gray};
+    text-align: right;
 
     span:after {
       content: '\\2022';

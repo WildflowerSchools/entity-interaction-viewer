@@ -28,7 +28,7 @@ function Filters({
   const chartOptions = [
     {value: '', label: 'Select Display'},
     {value: null, label: '──────────', disabled: true}
-  ].concat(charts);
+  ].concat(charts.map(c => ({value: c.name, label: c.name})));
 
   const studentOptions = [
     {value: '', label: 'Select Student'},

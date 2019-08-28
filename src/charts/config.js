@@ -90,6 +90,19 @@ export const interactions = {
   }
 };
 
+// https://github.com/plouc/nivo/blob/master/packages/core/src/theming/defaultTheme.js
+export const theme = {
+  fontSize: 13,
+  textColor: 'currentColor',
+  axis: {
+    legend: {
+      text: {
+        fontSize: 13
+      }
+    }
+  }
+};
+
 export default {
   concentrations,
   engagements,
