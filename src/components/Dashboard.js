@@ -1,13 +1,13 @@
 import React, { useState, useMemo } from 'react';
-import { useQuery } from '../context/data';
+import { useQuery } from '../hooks';
 import Footer from './Footer';
 import Filters from './Filters';
-import charts, { config } from '../charts';
-import { isEmpty, noop } from '../utils';
+import charts from '../charts';
+import { isEmpty } from '../utils';
 
 const initialState = {
-  chart: 'activities',
-  student: 'p0008',
+  chart: '',
+  student: '',
   startDate: '',
   endDate: ''
 };
@@ -16,7 +16,7 @@ function Dashboard(props) {
 
   const [ state, setState ] = useState(initialState);
   const { chart, student, startDate, endDate } = state;
-  const { data } = useQuery('TODO');
+  const { data } = useQuery('TODO: add GraphQL to DataProvider');
 
   function onChartChange(value) {
     setState(state => ({...state, chart: value}));
@@ -26,22 +26,27 @@ function Dashboard(props) {
     setState(state => ({...state, student: value}));
   }
 
-  function onStartDateChange(date) {
-    setState(state => ({...state, startDate: date}));
+  function onStartDateChange(value) {
+    setState(state => ({...state, startDate: value}));
   }
 
-  function onEndDateChange(date) {
-    setState(state => ({...state, endDate: date}));
+  function onEndDateChange(value) {
+    setState(state => ({...state, endDate: value}));
   }
 
   const students = useMemo(() => {
-    return data.map(entry => ({
-      id: entry.person_id,
-      name: entry.name
-    })).sort((a, b) => a.name < b.name ? -1 : 1)
+    return data.map(({person_id: id, name}) => ({id, name})).sort((a, b) => a.name < b.name ? -1 : 1)
   }, []);
 
-  const Chart = !isEmpty(chart) ? charts.find(c => c.value === chart).component : noop;
+  // TODO: style default "no selections" landing view
+  let content = <div className="wfs-landing"></div>;
+  // TODO: this logic may need to change when live queries and dates are used
+  const hasChart = !isEmpty(chart) && !isEmpty(student);
+
+  if (hasChart) {
+    const Chart = charts.find(c => c.value === chart).component;
+    content = <Chart data={data.find(d => d.person_id === student)} />
+  }
 
   return (
     <React.Fragment>
@@ -57,20 +62,9 @@ function Dashboard(props) {
         onStartDateChange={onStartDateChange}
         onEndDateChange={onEndDateChange}
       />
-      {student && <Chart
-        student={students.find(s => s.id === student)}
-        data={data.find(d => d.person_id === student)}
-      />}
-
-      {/* <Chart
-        type="engagement"
-        width={500}
-        height={400}
-        data={[data[0]]}
-      /> */}
+      {content}
       <Footer />
-      <hr />
-      {window.debug(config)}
+      {window.debug(require('../charts').config)}
     </React.Fragment>
   );
 }

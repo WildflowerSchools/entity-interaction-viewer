@@ -17,7 +17,7 @@ async function init() {
   if (!token) return Promise.resolve(null);
 
   return await new Promise(resolve => {
-    const delay = 0; // 500 + Math.random() * 2500;
+    const delay = Math.random() * 1000;
     setTimeout(() => resolve(Math.random()), delay);
   });
 }
@@ -34,11 +34,12 @@ function AuthProvider(props) {
   } = useAsync(init);
 
   if (isLoading) {
-    return <div>loading...</div>
+    // TODO: render loading indicator (or nothing)?
+    return <div>verifying token...</div>
   }
 
   if (error) {
-    // TODO: caputure exception in sentry?
+    // TODO: caputure exception in Sentry?
     return <div>{window.debug(error)}</div>
   }
 
@@ -48,7 +49,7 @@ function AuthProvider(props) {
       const delay = 200 + Math.random() * 1800;
       setTimeout(() => {
         localStorage.setItem('token', Math.random());
-        setData(true);
+        setData({name: 'Paul'});
         resolve();
       }, delay);
     });
@@ -60,6 +61,8 @@ function AuthProvider(props) {
   }
 
   return (
+    // useMemo not necessary for value here because this is the top
+    // component in the ap and will only re-render when auth data changes
     <Context.Provider value={{isAuthed: !isEmpty(data), login, logout}} {...props} />
   );
 }

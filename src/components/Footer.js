@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAuth } from '../context/auth';
+import { useAuth } from '../hooks';
 
 function Footer(props) {
 
@@ -7,9 +7,8 @@ function Footer(props) {
 
   return (
     <div className="wfs-footer">
-      Reporting by <a href="https://wildflowerschools.org/" target="_blank">Wildflower Schools</a>
-      &nbsp;&nbsp;&bull;&nbsp;&nbsp;
-      <a href="#" onClick={logout}>Logout</a>
+      <span>Reporting by <a href="https://wildflowerschools.org/" target="_blank">Wildflower Schools</a></span>
+      <a href="#" onClick={e => (e.preventDefault(), logout())}>Logout</a>
     </div>
   );
 }

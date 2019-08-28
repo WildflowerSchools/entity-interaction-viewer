@@ -2,6 +2,8 @@ import { useLayoutEffect } from 'react';
 
 export default function useBreakpoints(ref, breakpoints) {
 
+  // regular expression to remove our breakpoint classes,
+  // would need to be dynamic if custom prefix option is enabled
   const regex = new RegExp(/(wfs-size-)[.\S]+/, 'g');
 
   // convert breakpoints to an array of [key, value] pairs, sorted by width
@@ -10,13 +12,14 @@ export default function useBreakpoints(ref, breakpoints) {
     .sort((a, b) => b[1] - a[1]);
 
   function getCurrentBreakpoint(width) {
-    const breakpoint = breakpoints.find(b => width >= b[1]);
-    return breakpoint ? breakpoint[0] : breakpoints[breakpoints.length - 1][0];
+    const found = breakpoints.find(b => width >= b[1]);
+    return found ? found[0] : breakpoints[breakpoints.length - 1][0];
   }
 
   useLayoutEffect(() => {
 
     function resize() {
+
       const el = ref.current;
       const className = `wfs-size-${getCurrentBreakpoint(el.offsetWidth)}`;
       if (el.classList.contains(className)) return;

@@ -1,43 +1,8 @@
 import React from 'react';
-import { css, cx } from 'emotion';
 import { isUndefined } from '../utils';
-
-const styles = css`
-  display: inline-block;
-  position: relative;
-  margin: 0;
-  padding: 0.75em 1.25em;
-  font-size: 1em;
-  line-height: 1;
-  color: #FFF;
-  border: none;
-  border-radius: 3px;
-  background-color: #20A79F;
-  letter-spacing: 0.05em;
-  text-decoration: none;
-  text-transform: uppercase;
-  white-space: nowrap;
-  outline: none;
-  cursor: pointer;
-  transition: all 0.2s;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-
-  &:focus,
-  &:hover {
-    background-color: #0E928A;
-  }
-`
 
 function Button({
   as: Element = 'button',
-  variant = '',
   className = '',
   children,
   ...props
@@ -48,7 +13,7 @@ function Button({
   }
 
   return (
-    <Element className={cx(styles, variant, className)} {...props}>
+    <Element className="wfs-btn" {...props}>
       {children}
     </Element>
   );

@@ -5,14 +5,9 @@ import { isObject, isString } from './utils';
 import Providers from './context';
 import App from './components/App';
 
-const defaults = {
+const defaultOptions = {
   target: null,
-  prefix: 'wfs-',
-  breakpoints: {
-    sm: 400,
-    md: 600,
-    lg: 800
-  }
+  breakpoints: {sm: 400, md: 600, lg: 800}
 };
 
 domready(() => {
@@ -22,7 +17,7 @@ domready(() => {
     return;
   }
 
-  const options = Object.assign({}, defaults, window.wildflower.o);
+  const options = Object.assign({}, defaultOptions, window.wildflower.o);
   const container = document.createElement('div');
   container.id = 'wildflower';
 
@@ -30,7 +25,7 @@ domready(() => {
     const target = document.querySelector(options.target);
     target ? target.appendChild(container) : console.warn(`[wildflower] could not embed into ${options.target}`);
   } else {
-    // TODO: change this to something more specific like cdn.wildflowerschools.org/viewer
+    // TODO: change this to something more specific like cdn.wildflowerschools.org/embed
     const script = document.querySelector(`script[src*="bundle"]`);
     script.parentElement.insertBefore(container, script);
   }

@@ -40,7 +40,10 @@ module.exports = (env, options) => {
         },
       }, {
         test: /\.css$/i,
-        use: ['to-string-loader', 'css-loader']
+        use: [
+          'to-string-loader',
+          'css-loader'
+        ]
       }]
     },
     plugins: [

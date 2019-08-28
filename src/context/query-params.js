@@ -1,8 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useContext
-} from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 const Context = React.createContext();
 
@@ -18,9 +14,9 @@ function QueryParamsProvider(props) {
 
   const [ state, setState ] = useState({
     c: null, // classroom id
-    d: null, // from and to date range
-    s: null, // all students, list of ids or single student id
-    v: null  // view (login, timeline or graph)?
+    d: null, // start and end dates
+    s: null, // all students, list of student ids or single student id
+    v: null  // chart view
   });
 
   function setParams(value) {

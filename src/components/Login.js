@@ -13,9 +13,9 @@ function Login(props) {
   }
 
   return (
-    <Button onClick={onClick}>
-      {isLoading ? 'Loading' : 'Login'}
-    </Button>
+    <div className="wfs-login">
+      <Button onClick={onClick}>{isLoading ? 'Loading' : 'Login'}</Button>
+    </div>
   );
 }
 

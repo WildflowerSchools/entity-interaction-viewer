@@ -35,10 +35,6 @@ export function toBoolean(value) {
   return Boolean(value);
 };
 
-export function isElement(value) {
-  return !!(value && value.nodeType === 1);
-};
-
 export function isEmpty(value) {
   if (isUndefined(value) || value === null || value === false || value === 0) {
     return true;
@@ -82,20 +78,8 @@ export function isUndefined(value) {
   return typeof value === 'undefined';
 };
 
-export function pluck(key) {
-  return array => Array.from(new Set(array.map(o => o[key])));
-};
-
 export function clone(source) {
   return Object.assign({}, source);
-};
-
-export function random(min, max) {
-  if(arguments.length === 0) return Math.random();
-  if(Array.isArray(min)) return min[ Math.floor(Math.random() * min.length) ];
-  if(typeof min === 'undefined') min = 1;
-  if(typeof max === 'undefined') max = min || 1, min = 0;
-  return min + Math.random() * (max - min);
 };
 
 export function toTitleCase(s) {
