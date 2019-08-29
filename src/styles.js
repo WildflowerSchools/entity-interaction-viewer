@@ -1,30 +1,34 @@
-import { css } from 'emotion';
+
+// pass-through tagged template function to enable css syntax highlighting
+function css(strings, ...vars) {
+  return strings.map((str, i) => `${str}${vars[i]}`).join('');
+}
 
 const colors = {
   primary: '#20A79F',
   gray: '#808080'
 };
 
-export default css`
+const styles = document.createTextNode(css`
 
-  font-size: 16px;
-  font-family: sans-serif;
-  color: #2B2B2B;
-  max-width: 100%;
-
-  *,
-  *:before,
-  *:after {
+  .wfs-app {
+    font-size: 16px;
+    font-family: sans-serif;
+    color: #2B2B2B;
+    max-width: 100%;
+  }
+  .wfs-app *,
+  .wfs-app *:before,
+  .wfs-app *:after {
     box-sizing: border-box;
   }
-  a {
+  .wfs-app a {
     color: ${colors.primary};
     text-decoration: none;
-
-    &:focus,
-    &:hover {
-      color: #00867E;
-    }
+  }
+  .wfs-app a:focus,
+  .wfs-app a:hover {
+    color: #00867E;
   }
   .wfs-login {
     /* TODO: style login view */
@@ -34,10 +38,9 @@ export default css`
     align-items: flex-end;
     justify-content: space-between;
     margin-bottom: 1.5em;
-
-    > * + * {
-      margin-left: 15px;
-    }
+  }
+  .wfs-filters > * + * {
+    margin-left: 15px;
   }
   .wfs-field {
     flex: 1 0 auto;
@@ -77,11 +80,10 @@ export default css`
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-
-    &:focus,
-    &:hover {
-      background-color: #00867E;
-    }
+  }
+  .wfs-btn:focus,
+  .wfs-btn:hover {
+    background-color: #00867E;
   }
   .wfs-select {
     display: block;
@@ -106,17 +108,12 @@ export default css`
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-
-    &-empty {
-      color: ${colors.gray};
-    }
-    /* &:focus {
-      border: 1px solid #CCC;
-      box-shadow: 0 0 1px 3px rgba(32,167,159,0.2);
-    } */
-    &::-ms-expand {
-      display: none;
-    }
+  }
+  .wfs-select-empty {
+    color: ${colors.gray};
+  }
+  .wfs-select::-ms-expand {
+    display: none;
   }
 
   /* https://github.com/gpbl/react-day-picker/blob/master/src/style.css */
@@ -129,50 +126,48 @@ export default css`
     border: 1px solid #D9D9D9;
     box-shadow: 0 1px 0 1px rgba(0,0,0,0.04);
     background-color: #FFF;
-
-    &:before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 2.5em;
-      height: 100%;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 21 20'%3E%3Cpath fill='%23${colors.primary.slice(1)}' fill-rule='nonzero' d='M18.3 2.41h-1.92v1.16c0 .2-.18.38-.39.38h-.77a.39.39 0 0 1-.38-.38V2.4H5.6v1.16c0 .2-.18.38-.39.38h-.77a.39.39 0 0 1-.38-.38V2.4H2.15c-1.06 0-1.93.87-1.93 1.93V17.4c0 1.06.87 1.93 1.93 1.93H18.3c1.06 0 1.92-.87 1.92-1.93V4.34c0-1.06-.86-1.93-1.92-1.93zm.38 14.43c0 .53-.43.96-.96.96h-15a.96.96 0 0 1-.96-.96V8.18c0-.2.17-.38.39-.38H18.3c.21 0 .38.17.38.38v8.66zM5.61 1.26a.39.39 0 0 0-.39-.38h-.77a.39.39 0 0 0-.38.38v1.15H5.6V1.26zm10.77 0a.39.39 0 0 0-.39-.38h-.77a.39.39 0 0 0-.38.38v1.15h1.54V1.26z'/%3E%3C/svg%3E");
-      background-size: auto 55%;
-      background-position: 0.9em 48%;
-      background-repeat: no-repeat;
-      cursor: default;
-    }
-    &:first-of-type {
-      border-radius: 3px 0 0 3px;
-    }
-    &:last-of-type {
-      border-radius: 0 3px 3px 0;
-      border-left: 0;
-
-      .DayPickerInput-Overlay {
-        left: auto;
-        right: 0;
-      }
-    }
-    input {
-      width: 100%;
-      height: 100%;
-      padding: 0.75em 1.5em 0.75em 3.25em;
-      font-size: 0.9375em;
-      font-family: inherit;
-      line-height: 1.3;
-      color: currentColor;
-      background-color: transparent;
-      border: 0;
-      outline: none;
-    }
-    input::-webkit-input-placeholder { color: ${colors.gray}; }
-    input::-moz-placeholder          { color: ${colors.gray}; }
-    input:-ms-input-placeholder      { color: ${colors.gray}; }
-    input:-moz-placeholder           { color: ${colors.gray}; }
-    input::placeholder               { color: ${colors.gray}; }
   }
+  .DayPickerInput:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2.5em;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 21 20'%3E%3Cpath fill='%23${colors.primary.slice(1)}' fill-rule='nonzero' d='M18.3 2.41h-1.92v1.16c0 .2-.18.38-.39.38h-.77a.39.39 0 0 1-.38-.38V2.4H5.6v1.16c0 .2-.18.38-.39.38h-.77a.39.39 0 0 1-.38-.38V2.4H2.15c-1.06 0-1.93.87-1.93 1.93V17.4c0 1.06.87 1.93 1.93 1.93H18.3c1.06 0 1.92-.87 1.92-1.93V4.34c0-1.06-.86-1.93-1.92-1.93zm.38 14.43c0 .53-.43.96-.96.96h-15a.96.96 0 0 1-.96-.96V8.18c0-.2.17-.38.39-.38H18.3c.21 0 .38.17.38.38v8.66zM5.61 1.26a.39.39 0 0 0-.39-.38h-.77a.39.39 0 0 0-.38.38v1.15H5.6V1.26zm10.77 0a.39.39 0 0 0-.39-.38h-.77a.39.39 0 0 0-.38.38v1.15h1.54V1.26z'/%3E%3C/svg%3E");
+    background-size: auto 55%;
+    background-position: 0.9em 48%;
+    background-repeat: no-repeat;
+    cursor: default;
+  }
+  .DayPickerInput:first-of-type {
+    border-radius: 3px 0 0 3px;
+  }
+  .DayPickerInput:last-of-type {
+    border-radius: 0 3px 3px 0;
+    border-left: 0;
+  }
+  .DayPickerInput:last-of-type .DayPickerInput-Overlay {
+    left: auto;
+    right: 0;
+  }
+  .DayPickerInput input {
+    width: 100%;
+    height: 100%;
+    padding: 0.75em 1.5em 0.75em 3.25em;
+    font-size: 0.9375em;
+    font-family: inherit;
+    line-height: 1.3;
+    color: currentColor;
+    background-color: transparent;
+    border: 0;
+    outline: none;
+  }
+  .DayPickerInput input::-webkit-input-placeholder { color: ${colors.gray}; }
+  .DayPickerInput input::-moz-placeholder          { color: ${colors.gray}; }
+  .DayPickerInput input:-ms-input-placeholder      { color: ${colors.gray}; }
+  .DayPickerInput input:-moz-placeholder           { color: ${colors.gray}; }
+  .DayPickerInput input::placeholder               { color: ${colors.gray}; }
 
   .DayPickerInput-Overlay {
     margin-top: 1px;
@@ -194,11 +189,10 @@ export default css`
     font-weight: 400;
     line-height: 1;
     border-radius: 0;
-
-    &:hover:not(.DayPicker-Day--outside):not(.DayPicker-Day--disabled) {
-      color: #FFF !important;
-      background-color: ${colors.primary} !important;
-    }
+  }
+  .DayPicker-Day:hover:not(.DayPicker-Day--outside):not(.DayPicker-Day--disabled) {
+    color: #FFF !important;
+    background-color: ${colors.primary} !important;
   }
   .DayPicker-Day--start:not(.DayPicker-Day--outside),
   .DayPicker-Day--end:not(.DayPicker-Day--outside),
@@ -210,7 +204,6 @@ export default css`
   .DayPicker-Day--today {
     color: currentColor;
   }
-
   .wfs-chart {
     margin: 2em 0 1em 0;
   }
@@ -222,10 +215,14 @@ export default css`
     padding: 0 5px;
     color: ${colors.gray};
     text-align: right;
-
-    span:after {
-      content: '\\2022';
-      margin: 0 0.5em;
-    }
   }
-  `
+  .wfs-footer span:after {
+    content: '\\2022';
+    margin: 0 0.5em;
+  }
+
+`);
+
+const style = document.createElement('style');
+style.appendChild(styles);
+document.body.appendChild(style);
