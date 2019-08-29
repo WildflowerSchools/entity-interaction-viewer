@@ -13,7 +13,7 @@ function App(props) {
   useBreakpoints(ref, props.breakpoints);
 
   return (
-    <div ref={ref} className={styles}>
+    <div ref={ref} className="wfs-app">
       {isAuthed ? <Dashboard /> : <Login />}
     </div>
   );
