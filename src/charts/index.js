@@ -5,10 +5,8 @@ import AllocationPie from './AllocationPie';
 import Interactions from './Interactions';
 import config from './config';
 
-export { config };
-
 // TODO: rename these to something more descriptive
-export default [{
+const charts = [{
   name: 'Activities',
   component: ActivitiesBar
 }, {
@@ -19,8 +17,11 @@ export default [{
   component: Interactions
 }, {
   name: 'Concentration',
-  component: props => <AllocationPie type="concentration" {...props} />
+  component: props => <AllocationPie {...props} type="concentration" />
 }, {
   name: 'Engagement',
-  component: props => <AllocationPie type="engagement" {...props} />
+  component: props => <AllocationPie {...props} type="engagement" />
 }];
+
+export default charts;
+export { config };

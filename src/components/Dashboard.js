@@ -16,7 +16,7 @@ function Dashboard(props) {
 
   const [ state, setState ] = useState(initialState);
   const { chart, student, startDate, endDate } = state;
-  const { data } = useQuery('TODO: add GraphQL to DataProvider');
+  const { data, isLoading } = useQuery('TODO: add GraphQL to DataProvider');
 
   function onChartChange(value) {
     setState(state => ({...state, chart: value}));
@@ -38,6 +38,7 @@ function Dashboard(props) {
     return data.map(({person_id: id, name}) => ({id, name})).sort((a, b) => a.name < b.name ? -1 : 1)
   }, []);
 
+  // TODO: loading state / spinner component while querying data?
   // TODO: style default "no selections" landing view
   let content = <div className="wfs-landing"></div>;
   // TODO: this logic may need to change when live queries and dates are used
@@ -65,6 +66,7 @@ function Dashboard(props) {
       {content}
       <Footer />
       <hr />
+      {window.debug(state)}
       {window.debug(require('../charts').config)}
     </React.Fragment>
   );

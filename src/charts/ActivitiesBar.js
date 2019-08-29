@@ -9,11 +9,11 @@ const tooltip = d => (
   </div>
 )
 
-function ActivitiesBar(props) {
+function ActivitiesBar({data}) {
 
   let maxLength = 0;
 
-  const data = props.data.interactions.reduce((result, row) => {
+  data = data.interactions.reduce((result, row) => {
 
     const activity = toTitleCase(row.activity.trim()) || 'No Activity';
     const entry = result.find(o => o.activity === activity);

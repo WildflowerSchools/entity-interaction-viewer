@@ -110,10 +110,10 @@ export default css`
     &-empty {
       color: ${colors.gray};
     }
-    &:focus {
+    /* &:focus {
       border: 1px solid #CCC;
       box-shadow: 0 0 1px 3px rgba(32,167,159,0.2);
-    }
+    } */
     &::-ms-expand {
       display: none;
     }
@@ -219,6 +219,7 @@ export default css`
   }
   .wfs-footer {
     font-size: 0.8125em;
+    padding: 0 5px;
     color: ${colors.gray};
     text-align: right;
 

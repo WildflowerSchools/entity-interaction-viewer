@@ -1,18 +1,21 @@
 
 const NO_DATA = {
   label: 'No Data',
-  color: '#CCCCCCC'
+  color: '#CCCCCC'
 };
 
 export const concentrations = {
   CONCENTRATION: {
-    label: 'Concentration'
+    label: 'Concentration',
+    color: '#00FF00'
   },
   DISTRACTED_WORKING: {
-    label: 'Distracted Working'
+    label: 'Distracted Working',
+    color: '#FFFF00'
   },
   DISORDER: {
-    label: 'Disorder'
+    label: 'Disorder',
+    color: '#FF0000'
   },
   NO_DATA
 };
@@ -90,8 +93,9 @@ export const interactions = {
   }
 };
 
-// https://github.com/plouc/nivo/blob/master/packages/core/src/theming/defaultTheme.js
 export const theme = {
+  // shared chart styles
+  // https://github.com/plouc/nivo/blob/master/packages/core/src/theming/defaultTheme.js
   fontSize: 13,
   textColor: 'currentColor',
   axis: {
