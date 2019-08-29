@@ -7,15 +7,15 @@ const NO_DATA = {
 export const concentrations = {
   CONCENTRATION: {
     label: 'Concentration',
-    color: '#00FF00'
+    color: '#20A79F'
   },
   DISTRACTED_WORKING: {
     label: 'Distracted Working',
-    color: '#FFFF00'
+    color: '#B983DF'
   },
   DISORDER: {
     label: 'Disorder',
-    color: '#FF0000'
+    color: '#FF3143'
   },
   NO_DATA
 };
