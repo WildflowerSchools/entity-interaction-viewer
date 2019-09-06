@@ -78,8 +78,10 @@ export function isUndefined(value) {
   return typeof value === 'undefined';
 };
 
+// deep clone, can't use Object.assign(...)
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign#Deep_Clone
 export function clone(source) {
-  return Object.assign({}, source);
+  return JSON.parse(JSON.stringify(source));
 };
 
 export function toTitleCase(s) {

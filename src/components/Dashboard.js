@@ -6,8 +6,8 @@ import charts from '../charts';
 import { isEmpty } from '../utils';
 
 const initialState = {
-  chart: 'Concentration',
-  student: 'p0008',
+  chart: 'Timeline',
+  student: 'p0009',
   startDate: '',
   endDate: ''
 };

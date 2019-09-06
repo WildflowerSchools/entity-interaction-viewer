@@ -1,7 +1,7 @@
 
 // pass-through tagged template function to enable css syntax highlighting
 function css(strings, ...vars) {
-  return strings.map((str, i) => `${str}${vars[i]}`).join('');
+  return strings.map((str, i) => `${str}${vars[i] || ''}`).join('');
 }
 
 const colors = {
@@ -21,6 +21,10 @@ const styles = document.createTextNode(css`
   .wfs-app *:before,
   .wfs-app *:after {
     box-sizing: border-box;
+  }
+  .wfs-app ul,
+  .wfs-app ol {
+    list-style: none;
   }
   .wfs-app a {
     color: ${colors.primary};
