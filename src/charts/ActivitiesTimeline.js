@@ -1,6 +1,8 @@
 import React from 'react';
-import config from './config';
+import { interactions } from './config';
 import { isEmpty, clone, toTitleCase } from '../utils';
+
+
 
 function TimelineItem({
   as: Element = 'div',
@@ -9,10 +11,26 @@ function TimelineItem({
 
   const { activity, date, minutes, ...behaviors } = data;
 
+  const h = date.getHours();
+  const m = String(date.getMinutes()).padStart(2, '0');
+  const time = `${h % 12}:${m} ${h >= 12 ? 'pm' : 'am'}`;
+
+  const content = Object.entries(behaviors).map(([behavior, levels], index) => (
+    <div key={index} style={{paddingLeft:20}}>
+      <h4>{behavior}</h4>
+      <div style={{display:'flex'}}>
+        {Object.keys(levels).map(key => (
+          <div key={key} style={{backgroundColor: interactions.levels[key].color, width: `${levels[key] / minutes * 100}%`, height: 5}}></div>
+        ))}
+      </div>
+    </div>
+  ))
+
   return (
-    <Element>
-      {activity} <small style={{color:'#CCC'}}> at {date.getFullYear()} for {minutes} minutes</small>
-      {/* {window.debug(behaviors)} */}
+    <Element className="wfs-timeline-item">
+      <h3>{activity}</h3>
+      <small style={{color:'#999'}}> {time} for {minutes} minutes</small>
+      {content}
     </Element>
   )
 }
@@ -22,8 +40,8 @@ function Timeline({data}) {
   // debug queried data
   // return <>{window.debug(data.interactions)}</>;
 
-  const levels = Object.keys(config.interactions.levels);
-  const behaviors = Object.keys(config.interactions.behaviors);
+  const levels = Object.keys(interactions.levels);
+  const behaviors = Object.keys(interactions.behaviors);
 
   const levelsObject = levels.reduce((result, key) => {
     result[key] = 0;
@@ -60,7 +78,7 @@ function Timeline({data}) {
 
     behaviors.forEach(behavior => {
       const level = row[behavior];
-      entry[behavior][level]++;
+      !isEmpty(level) && entry[behavior][level]++;
     });
 
     return result;
@@ -70,10 +88,15 @@ function Timeline({data}) {
   // debug parsed data
   // return <>{window.debug(data)}</>;
 
+  const content = data.map((row, index) => (
+    // TODO: display date headings if this query spans multiple days
+    // will be helpful to see real data and revisit
+    <TimelineItem key={index} as="li" data={row} />
+  ));
+
   return (
-    <ol>
-      {data.map((row, index) => <TimelineItem key={index} as="li" data={row} />)}
-      <li>{window.debug(data)}</li>
+    <ol className="wfs-timeline">
+      {content}
     </ol>
   )
 }

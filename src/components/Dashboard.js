@@ -16,7 +16,12 @@ function Dashboard(props) {
 
   const [ state, setState ] = useState(initialState);
   const { chart, student, startDate, endDate } = state;
-  const { data, isLoading } = useQuery('TODO: add GraphQL to DataProvider');
+
+  const { data, loading, error } = useQuery(
+    // https://github.com/nearform/graphql-hooks#quick-start
+    `TODO: add GraphQLClient to DataProvider (${student}, ${startDate}, ${endDate})`,
+    state
+  );
 
   function onChartChange(value) {
     setState(state => ({...state, chart: value}));
