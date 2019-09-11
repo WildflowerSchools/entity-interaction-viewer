@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useState , useCallback } from 'react';
 import { interactions } from './config';
 import { isEmpty, clone, toTitleCase } from '../utils';
 
-
+export function useToggle(initial = false) {
+  const [ on, setState ] = useState(initial);
+  const toggle = useCallback(() => setState(on => !on), []);
+  return [ on, toggle ];
+};
 
 function TimelineItem({
   as: Element = 'div',
   data
 }) {
 
+  const [ isExpanded, toggle ] = useToggle();
   const { activity, date, minutes, ...behaviors } = data;
 
   const h = date.getHours();
@@ -18,7 +23,7 @@ function TimelineItem({
   const content = Object.entries(behaviors).map(([behavior, levels], index) => (
     <div key={index} style={{paddingLeft:20}}>
       <h4>{behavior}</h4>
-      <div style={{display:'flex'}}>
+      <div style={{display: 'flex'}}>
         {Object.keys(levels).map(key => (
           <div key={key} style={{backgroundColor: interactions.levels[key].color, width: `${levels[key] / minutes * 100}%`, height: 5}}></div>
         ))}
@@ -28,14 +33,16 @@ function TimelineItem({
 
   return (
     <Element className="wfs-timeline-item">
-      <h3>{activity}</h3>
+      <h3 onClick={toggle} style={{cursor: 'pointer'}}>{activity}</h3>
       <small style={{color:'#999'}}> {time} for {minutes} minutes</small>
-      {content}
+      <div style={{display: isExpanded ? 'block' : 'none'}}>
+        {content}
+      </div>
     </Element>
   )
 }
 
-function Timeline({data}) {
+function ActivitiesTimeline({data}) {
 
   // debug queried data
   // return <>{window.debug(data.interactions)}</>;
@@ -63,8 +70,6 @@ function Timeline({data}) {
 
     if (isEmpty(entry) || entry.activity !== activity) {
       // new interaction, initialize with defaults
-      // need to deep clone behaviors object or
-      // else our levels will all be the same
       entry = Object.assign({
         activity,
         date: new Date(row.at),
@@ -101,4 +106,4 @@ function Timeline({data}) {
   )
 }
 
-export default Timeline;
+export default ActivitiesTimeline;
