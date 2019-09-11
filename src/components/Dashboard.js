@@ -51,7 +51,7 @@ function Dashboard(props) {
 
   if (hasChart) {
     const Chart = charts.find(c => c.name === chart).component;
-    content = <Chart data={data.find(d => d.person_id === student)} />
+    content = <Chart student={student} dates={[startDate, endDate]} data={data.find(d => d.person_id === student)} />
   }
 
   return (

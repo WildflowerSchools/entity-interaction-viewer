@@ -42,7 +42,11 @@ function TimelineItem({
   )
 }
 
-function ActivitiesTimeline({data}) {
+function ActivitiesTimeline({
+  student,
+  dates,
+  data
+}) {
 
   // debug queried data
   // return <>{window.debug(data.interactions)}</>;
@@ -91,13 +95,14 @@ function ActivitiesTimeline({data}) {
   }, [])
 
   // debug parsed data
-  // return <>{window.debug(data)}</>;
+  // return <>{window.debug(student)}</>;
 
-  const content = data.map((row, index) => (
+  const content = data.map((row, index) => {
     // TODO: display date headings if this query spans multiple days
     // will be helpful to see real data and revisit
-    <TimelineItem key={index} as="li" data={row} />
-  ));
+    const key = `${student}-${index}`;
+    return <TimelineItem key={key} as="li" data={row} />
+  });
 
   return (
     <ol className="wfs-timeline">
