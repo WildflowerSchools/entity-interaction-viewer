@@ -113,7 +113,7 @@ const styles = document.createTextNode(css`
     -moz-appearance: none;
     appearance: none;
   }
-  .wfs-select-empty {
+  .wfs-select--is-empty {
     color: ${colors.gray};
   }
   .wfs-select::-ms-expand {
@@ -208,14 +208,62 @@ const styles = document.createTextNode(css`
   .DayPicker-Day--today {
     color: currentColor;
   }
+
+
+  .wfs-timeline-entry-header {
+    cursor: pointer;
+    user-select: none;
+  }
+  .wfs-timeline-entry-details {
+    list-style: none;
+    margin: 0.75em 0;
+  }
+  .wfs-timeline-entry-behavior {
+    display: flex;
+    align-items: center;
+    line-height: 1;
+    padding: 0.2em 0;
+  }
+  .wfs-timeline-entry-behavior > span {
+    /* TODO: make this more responsive ... could use CSS grid for behavior rows */
+    width: 120px;
+    font-size: 0.875em;
+    padding-right: 1em;
+    text-align: right;
+    color: ${colors.gray};
+  }
+  .wfs-timeline-entry-behavior > div {
+    flex: 1 0 auto;
+  }
+  .wfs-timeline-entry-levels {
+    display: flex;
+    height: 7px;
+    font-size: 0;
+  }
+  /* border-radius and overflow: hidden on the parent element had some quirks */
+  .wfs-timeline-entry-levels > div:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    overflow: hidden;
+  }
+  .wfs-timeline-entry-levels > div:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    overflow: hidden;
+  }
+
+
   .wfs-chart {
     margin: 2em 0 1em 0;
   }
   .wfs-tooltip {
     font-size: 0.8125em;
   }
+
+
   .wfs-footer {
     font-size: 0.8125em;
+    margin-top: 2em;
     padding: 0 5px;
     color: ${colors.gray};
     text-align: right;

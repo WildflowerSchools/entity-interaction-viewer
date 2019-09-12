@@ -73,22 +73,22 @@ export const interactions = {
     orientated: {},
     looking: {},
     touching: {},
-    distracted: {},
     intentional: {},
-    careful: {}
+    careful: {},
+    distracted: {},
   },
   levels: {
-    COMPLETELY: {
-      label: 'Completely',
-      color: '#00FF00'
+    NOT: {
+      label: 'NOT',
+      color: '#BCC1C5'
     },
     PARTIAL: {
       label: 'Partial',
-      color: '#FFFF00'
+      color: '#00AAE5'
     },
-    NOT: {
-      label: 'NOT',
-      color: '#FF0000'
+    COMPLETELY: {
+      label: 'Completely',
+      color: '#005F9F'
     }
   }
 };

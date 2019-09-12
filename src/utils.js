@@ -81,14 +81,48 @@ export function isUndefined(value) {
   return typeof value === 'undefined';
 };
 
+export function toTitleCase(s) {
+  return s.split(' ').map(word => {
+    return word.startsWith('iP') ? word : word.charAt(0).toUpperCase() + word.slice(1)
+  }).join(' ');
+};
+
 // deep clone, can't use Object.assign(...)
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign#Deep_Clone
 export function clone(source) {
   return JSON.parse(JSON.stringify(source));
 };
 
-export function toTitleCase(s) {
-  return s.split(' ').map(word => {
-    return word.startsWith('iP') ? word : word.charAt(0).toUpperCase() + word.slice(1)
-  }).join(' ');
-};
+// shamelessly ported from:
+// https://github.com/jonschlinkert/time-stamp/blob/master/index.js
+export const format = (function() {
+
+  const regex = /(?=(YYYY|YY|MM|DD|HH|mm|ss|ms))\1([:\/]*)/g;
+
+  const patterns = {
+    YYYY: ['getFullYear', 4],
+    YY: ['getFullYear', 2],
+    MM: ['getMonth', 2, 1],
+    DD: ['getDate', 2],
+    HH: ['getHours', 2],
+    mm: ['getMinutes', 2],
+    ss: ['getSeconds', 2],
+    ms: ['getMilliseconds', 3]
+  };
+
+  return function(pattern, date) {
+
+    if (isEmpty(date)) {
+      date = new Date();
+    } else if (isString(date)) {
+      date = new Date(date);
+    }
+
+    return pattern.replace(regex, function(match, key, rest) {
+      const [ method, chars, add = 0 ] = patterns[key];
+      const value = `00${String(date[method]() + add).padStart(chars, '0')}`;
+      return value.slice(-chars) + (rest || '');
+    });
+  }
+
+})();

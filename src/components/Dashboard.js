@@ -50,8 +50,15 @@ function Dashboard(props) {
   const hasChart = !isEmpty(chart) && !isEmpty(student);
 
   if (hasChart) {
+
+    const chartProps = {
+      student,
+      dates: [startDate, endDate],
+      data: data.find(d => d.person_id === student)
+    };
+
     const Chart = charts.find(c => c.name === chart).component;
-    content = <Chart student={student} dates={[startDate, endDate]} data={data.find(d => d.person_id === student)} />
+    content = <Chart {...chartProps} />
   }
 
   return (

@@ -1,52 +1,54 @@
-import React, { useState , useCallback } from 'react';
+import React from 'react';
 import { interactions } from './config';
-import { isEmpty, clone, toTitleCase } from '../utils';
+import { useToggle } from '../hooks';
+import { isEmpty, format, clone, toTitleCase } from '../utils';
 
-export function useToggle(initial = false) {
-  const [ on, setState ] = useState(initial);
-  const toggle = useCallback(() => setState(on => !on), []);
-  return [ on, toggle ];
-};
+function TimelineDay(props) {
+  return (
+    <div className="wfs-timeline-day">
+      {props.day}
+    </div>
+  );
+}
 
-function TimelineItem({
-  as: Element = 'div',
-  data
-}) {
+function TimelineEntry(props) {
 
   const [ isExpanded, toggle ] = useToggle();
-  const { activity, date, minutes, ...behaviors } = data;
+  const { activity, date, minutes, ...behaviors } = props.data;
 
+  // TODO: update utils/format to accomodate additional patterns (A, a / am, pm) and use here
+  // https://momentjs.com/docs/#/displaying/
   const h = date.getHours();
   const m = String(date.getMinutes()).padStart(2, '0');
   const time = `${h % 12}:${m} ${h >= 12 ? 'pm' : 'am'}`;
 
-  const content = Object.entries(behaviors).map(([behavior, levels], index) => (
-    <div key={index} style={{paddingLeft:20}}>
-      <h4>{behavior}</h4>
-      <div style={{display: 'flex'}}>
-        {Object.keys(levels).map(key => (
-          <div key={key} style={{backgroundColor: interactions.levels[key].color, width: `${levels[key] / minutes * 100}%`, height: 5}}></div>
-        ))}
+  const details = Object.entries(behaviors).map(([behavior, levels]) => (
+    <li key={behavior} className="wfs-timeline-entry-behavior">
+      <span>{toTitleCase(behavior)}</span>
+      <div className="wfs-timeline-entry-levels">
+        {Object.keys(levels).map(key => {
+          const width = levels[key] / minutes * 100;
+          const color = interactions.levels[key].color;
+          return width ? <div key={key} style={{width: `${width}%`,backgroundColor: color}} /> : null
+        })}
       </div>
-    </div>
-  ))
+    </li>
+  ));
 
   return (
-    <Element className="wfs-timeline-item">
-      <h3 onClick={toggle} style={{cursor: 'pointer'}}>{activity}</h3>
-      <small style={{color:'#999'}}> {time} for {minutes} minutes</small>
-      <div style={{display: isExpanded ? 'block' : 'none'}}>
-        {content}
-      </div>
-    </Element>
-  )
+    <div className="wfs-timeline-entry">
+      <header className="wfs-timeline-entry-header" onClick={toggle}>
+        <h3>{activity}</h3>
+        <time>{time}</time> for <span>{minutes} minute{minutes === 1 ? '' : 's'}</span>
+      </header>
+      <ul className="wfs-timeline-entry-details" style={{display: isExpanded ? 'block' : 'none'}}>
+        {details}
+      </ul>
+    </div>
+  );
 }
 
-function ActivitiesTimeline({
-  student,
-  dates,
-  data
-}) {
+function ActivitiesTimeline({student, dates, data}) {
 
   // debug queried data
   // return <>{window.debug(data.interactions)}</>;
@@ -67,13 +69,13 @@ function ActivitiesTimeline({
   data = data.interactions.reduce((result, row, i) => {
 
     const activity = toTitleCase(row.activity.trim());
-    // TODO: what to dispally for emtpy activity strings?
+    // TODO: what to display for empty activity strings?
     if (isEmpty(activity)) return result;
 
     let entry = result[result.length - 1];
 
     if (isEmpty(entry) || entry.activity !== activity) {
-      // new interaction, initialize with defaults
+
       entry = Object.assign({
         activity,
         date: new Date(row.at),
@@ -95,19 +97,29 @@ function ActivitiesTimeline({
   }, [])
 
   // debug parsed data
-  // return <>{window.debug(student)}</>;
+  // return <>{window.debug(data)}</>;
 
-  const content = data.map((row, index) => {
-    // TODO: display date headings if this query spans multiple days
-    // will be helpful to see real data and revisit
-    const key = `${student}-${index}`;
-    return <TimelineItem key={key} as="li" data={row} />
-  });
+  const keyPrefix = `${student}-${format('YYYYMMDD', dates[0])}-${format('YYYYMMDD', dates[1])}`;
+  let currentDay; // format('YYYY-MM-DD', data[0].date);
+
+  const content = data.reduce((result, row, index) => {
+
+    const day = format('YYYY-MM-DD', row.date);
+
+    if (day !== currentDay) {
+      currentDay = day;
+      return result.concat(<TimelineDay key={day} day={day} />);
+    }
+
+    const key = `${keyPrefix}-${index}`;
+    return result.concat(<TimelineEntry key={key} data={row} />);
+
+  }, []);
 
   return (
-    <ol className="wfs-timeline">
+    <div className="wfs-timeline">
       {content}
-    </ol>
+    </div>
   )
 }
 

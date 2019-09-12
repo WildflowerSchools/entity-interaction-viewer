@@ -13,7 +13,7 @@ function Select(props) {
   ))
 
   return (
-    <select value={props.value} onChange={onChange} className={`wfs-select${isEmpty(props.value) ? ' wfs-select-empty' : ''}`}>
+    <select value={props.value} onChange={onChange} className={`wfs-select${isEmpty(props.value) ? ' wfs-select--is-empty' : ''}`}>
       {options}
     </select>
   );
