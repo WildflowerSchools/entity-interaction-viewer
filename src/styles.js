@@ -237,7 +237,7 @@ const styles = document.createTextNode(css`
   }
   .wfs-timeline-entry-levels {
     display: flex;
-    height: 7px;
+    height: 8px;
     font-size: 0;
   }
   /* border-radius and overflow: hidden on the parent element had some quirks */

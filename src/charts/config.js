@@ -79,7 +79,7 @@ export const interactions = {
   },
   levels: {
     NOT: {
-      label: 'NOT',
+      label: 'Not',
       color: '#BCC1C5'
     },
     PARTIAL: {

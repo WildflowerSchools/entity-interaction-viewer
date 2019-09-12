@@ -1,7 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import { useQuery } from '../hooks';
-import Footer from './Footer';
+import ChartHeader from './ChartHeader';
 import Filters from './Filters';
+import Footer from './Footer';
 import charts from '../charts';
 import { isEmpty } from '../utils';
 
@@ -51,14 +52,17 @@ function Dashboard(props) {
 
   if (hasChart) {
 
-    const chartProps = {
-      student,
-      dates: [startDate, endDate],
-      data: data.find(d => d.person_id === student)
-    };
-
     const Chart = charts.find(c => c.name === chart).component;
-    content = <Chart {...chartProps} />
+    const studentName = students.find(s => s.id === student).name;
+    const studentData = data.find(d => d.person_id === student);
+    const dates = [startDate, endDate];
+
+    content = (
+      <React.Fragment>
+        <ChartHeader student={studentName} dates={dates} />
+        <Chart student={student} dates={dates} data={studentData} />
+      </React.Fragment>
+    )
   }
 
   return (
