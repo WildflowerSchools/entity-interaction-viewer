@@ -78,17 +78,17 @@ export const interactions = {
     distracted: {},
   },
   levels: {
-    NOT: {
-      label: 'Not',
-      color: '#BCC1C5'
-    },
-    PARTIAL: {
-      label: 'Partial',
-      color: '#00AAE5'
-    },
     COMPLETELY: {
       label: 'Completely',
       color: '#005F9F'
+    },
+    PARTIAL: {
+      label: 'Partialy',
+      color: '#00AAE5'
+    },
+    NOT: {
+      label: 'Not at all',
+      color: '#BCC1C5'
     }
   }
 };

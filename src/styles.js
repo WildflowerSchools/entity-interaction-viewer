@@ -237,6 +237,30 @@ const styles = document.createTextNode(css`
   }
 
 
+  .wfs-timeline-legend {
+    display: flex;
+    align-items: center;
+    float: right;
+    margin-top: 0.25em;
+  }
+  .wfs-timeline-legend li {
+    display: flex;
+    align-items: center;
+    font-size: 0.875em;
+    /* font-weight: 700; */
+    line-height: 1;
+    margin-left: 1em;
+  }
+  .wfs-timeline-legend li:before {
+    content: '';
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    line-height: 0;
+    margin-right: 0.5em;
+    border-radius: 2px;
+    background-color: currentColor;
+  }
   .wfs-timeline-day {
     font-size: 0.9375em;
     /* font-weight: 700; */

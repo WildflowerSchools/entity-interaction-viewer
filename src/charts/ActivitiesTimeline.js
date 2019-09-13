@@ -3,6 +3,19 @@ import { interactions } from './config';
 import { useToggle } from '../hooks';
 import { isEmpty, format, clone, toTitleCase } from '../utils';
 
+function TimelineLegend(props) {
+
+  const items = Object.values(props.levels).map(level => {
+    return <li style={{color: level.color}}>{level.label}</li>
+  });
+
+  return (
+    <ul className="wfs-timeline-legend">
+      {items}
+    </ul>
+  );
+}
+
 function TimelineDay(props) {
   return <div className="wfs-timeline-day">{format('DDDD, MMMM D, YYYY', props.day)}</div>
 }
@@ -114,6 +127,7 @@ function ActivitiesTimeline({student, dates, data}) {
 
   return (
     <div className="wfs-timeline">
+      <TimelineLegend levels={interactions.levels} />
       {content}
     </div>
   )
