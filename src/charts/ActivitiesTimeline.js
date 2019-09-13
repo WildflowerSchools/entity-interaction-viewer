@@ -4,11 +4,7 @@ import { useToggle } from '../hooks';
 import { isEmpty, format, clone, toTitleCase } from '../utils';
 
 function TimelineDay(props) {
-  return (
-    <div className="wfs-timeline-day">
-      {props.day}
-    </div>
-  );
+  return <div className="wfs-timeline-day">{props.day}</div>
 }
 
 function TimelineEntry(props) {
@@ -37,9 +33,9 @@ function TimelineEntry(props) {
 
   return (
     <div className="wfs-timeline-entry">
-      <header className="wfs-timeline-entry-header" onClick={toggle}>
-        <h3>{activity}</h3>
-        <time>{time}</time> for <span>{minutes} minute{minutes === 1 ? '' : 's'}</span>
+      <header onClick={toggle} className={`wfs-timeline-entry-header${isExpanded ? ' wfs-timeline-entry-header--is-expanded' : ''}`}>
+        <div>{activity}</div>
+        <time>{time}</time> <span>{minutes} minute{minutes === 1 ? '' : 's'}</span>
       </header>
       <ul className="wfs-timeline-entry-details" style={{display: isExpanded ? 'block' : 'none'}}>
         {details}

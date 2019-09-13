@@ -49,7 +49,7 @@ function AllocationPie({type, data}) {
         theme={theme}
         // colors={{scheme: 'red_yellow_green'}}
         colors={d => typeConfig[d.level].color}
-        margin={{top: 30, right: 0, bottom: 40, left: 0}}
+        margin={{top: 30, right: 0, bottom: 30, left: 0}}
         innerRadius={0.33}
         cornerRadius={3}
         padAngle={0.5}
@@ -67,7 +67,7 @@ function AllocationPie({type, data}) {
           anchor: 'bottom-left',
           direction: 'column',
           translateX: 5,
-          translateY: 5,
+          translateY: 0,
           itemWidth: 150,
           itemHeight: 25,
           itemTextColor: '#808080',

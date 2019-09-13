@@ -4,17 +4,24 @@ function css(strings, ...vars) {
   return strings.map((str, i) => `${str}${vars[i] || ''}`).join('');
 }
 
+// TODO: expand this color palette with some better grays
 const colors = {
   primary: '#20A79F',
-  gray: '#808080'
+  gray: '#808080',
+  grayDark: '#2B2B2B',
+  grayLight: '#BBBBBB'
 };
+
+// We're generally avoiding using semantic markup (h1, h2, ul etc)
+// to prevent situations where a host page styles are overy specific
+// and cause conflicts with our base styles
 
 const styles = document.createTextNode(css`
 
   .wfs-app {
     font-size: 16px;
     font-family: sans-serif;
-    color: #2B2B2B;
+    color: ${colors.grayDark};
     max-width: 100%;
   }
   .wfs-app *,
@@ -203,20 +210,88 @@ const styles = document.createTextNode(css`
   .DayPicker-Day--selected:not(.DayPicker-Day--outside) {
     font-weight: 400;
     color: ${colors.primary} !important;
-    background-color: rgba(32,167,159,0.1) !important;
+    background-color: #F5F5F5 !important;
   }
   .DayPicker-Day--today {
     color: currentColor;
   }
 
 
+  .wfs-chart-header {
+    margin-top: 2em;
+    margin-bottom: 2em;
+  }
+  .wfs-chart-header strong {
+    display: inline-block;
+    margin-right: 0.625em;
+    font-size: 1.25em;
+    font-weight: 700;
+  }
+  .wfs-chart-header span {
+    color: ${colors.gray};
+  }
+
+
+  .wfs-tooltip {
+    font-size: 0.8125em;
+  }
+
+
+  .wfs-timeline-day {
+    font-size: 0.9375em;
+    font-weight: 700;
+    margin: 1em 0;
+    color: ${colors.gray};
+  }
   .wfs-timeline-entry-header {
+    display: flex;
+    align-items: flex-end;
+    line-height: 1;
+    margin: 0.625em 0;
     cursor: pointer;
     user-select: none;
   }
+  .wfs-timeline-entry-header div { /* heading */
+    font-size: 0.9375em;
+    font-weight: 700;
+    margin-left: 3em;
+    margin-right: 0.5em;
+    position: relative;
+  }
+  .wfs-timeline-entry-header div:before { /* indicator dot */
+    content: '';
+    position: absolute;
+    width: 1em;
+    height: 1em;
+    background-color: transparent;
+    border: 2px solid ${colors.grayLight};
+    border-radius: 100px;
+    left: -1.95em;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.125s;
+  }
+  .wfs-timeline-entry-header time {
+    font-size: 0.9em;
+    width: 4.5em;
+    color: ${colors.gray};
+    text-align: right;
+    order: -1;
+  }
+  .wfs-timeline-entry-header span {
+    display: inline-block;
+    font-size: 0.9em;
+    color: ${colors.gray};
+  }
+  .wfs-timeline-entry-header:hover div:before,
+  .wfs-timeline-entry-header--is-expanded div:before {
+    background-color: ${colors.primary};
+    border-color: ${colors.primary};
+  }
+
   .wfs-timeline-entry-details {
     list-style: none;
-    margin: 0.75em 0;
+    margin: 1.25em 0;
   }
   .wfs-timeline-entry-behavior {
     display: flex;
@@ -225,10 +300,12 @@ const styles = document.createTextNode(css`
     padding: 0.2em 0;
   }
   .wfs-timeline-entry-behavior > span {
-    /* TODO: make this more responsive ... could use CSS grid for behavior rows */
-    width: 120px;
+    /* warning: magic numbers! Avoiding px values to be more responsive to
+    font-size, but also not using rem because we have a font-size declaration on
+    the top-level app embed that cascades through the rest of the app */
+    width: 7.9em;
     font-size: 0.875em;
-    padding-right: 1em;
+    padding-right: 1.125em;
     text-align: right;
     color: ${colors.gray};
   }
@@ -250,14 +327,6 @@ const styles = document.createTextNode(css`
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     overflow: hidden;
-  }
-
-
-  .wfs-chart {
-    margin: 2em 0 1em 0;
-  }
-  .wfs-tooltip {
-    font-size: 0.8125em;
   }
 
 
