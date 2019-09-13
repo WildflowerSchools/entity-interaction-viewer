@@ -4,7 +4,7 @@ import { useToggle } from '../hooks';
 import { isEmpty, format, clone, toTitleCase } from '../utils';
 
 function TimelineDay(props) {
-  return <div className="wfs-timeline-day">{props.day}</div>
+  return <div className="wfs-timeline-day">{format('DDDD, MMMM D, YYYY', props.day)}</div>
 }
 
 function TimelineEntry(props) {

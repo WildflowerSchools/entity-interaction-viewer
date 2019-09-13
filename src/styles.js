@@ -239,9 +239,9 @@ const styles = document.createTextNode(css`
 
   .wfs-timeline-day {
     font-size: 0.9375em;
-    font-weight: 700;
+    /* font-weight: 700; */
     margin: 1em 0;
-    color: ${colors.gray};
+    color: ${colors.grayLight};
   }
   .wfs-timeline-entry-header {
     display: flex;

@@ -100,7 +100,8 @@ export function clone(source) {
 // Patterns based on https://momentjs.com/docs/#/displaying/
 export const format = (function() {
 
-  const regex = /(?=(YYYY|YY|MMMM|MMM|MM|DD|D|HH|mm|ss|ms))\1([:\/]*)/g;
+  // TODO: update this regex to honor escaped characters via \
+  const regex = /(?=(YYYY|YY|MMMM|MMM|MM|DDDD|DDD|DD|D|HH|mm|ss|ms))\1([:\/]*)/g;
 
   const months = [
     ['Jan', 'January'],
@@ -120,7 +121,7 @@ export const format = (function() {
   const days = [
     ['Sun', 'Sunday'],
     ['Mon', 'Monday'],
-    ['Tue', 'Thuesday'],
+    ['Tue', 'Tuesday'],
     ['Wed', 'Wednesday'],
     ['Thu', 'Thursday'],
     ['Fri', 'Friday'],
