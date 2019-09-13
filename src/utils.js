@@ -95,15 +95,48 @@ export function clone(source) {
 
 // shamelessly ported from:
 // https://github.com/jonschlinkert/time-stamp/blob/master/index.js
+// simple date formatting without the monstrosity that is moment.js
+// or unecessary date manipulation functionality (dayjs etc)
+// Patterns based on https://momentjs.com/docs/#/displaying/
 export const format = (function() {
 
-  const regex = /(?=(YYYY|YY|MM|DD|HH|mm|ss|ms))\1([:\/]*)/g;
+  const regex = /(?=(YYYY|YY|MMMM|MMM|MM|DD|D|HH|mm|ss|ms))\1([:\/]*)/g;
+
+  const months = [
+    ['Jan', 'January'],
+    ['Feb', 'February'],
+    ['Mar', 'March'],
+    ['Apr', 'April'],
+    ['May', 'May'],
+    ['Jun', 'June'],
+    ['Jul', 'July'],
+    ['Aug', 'August'],
+    ['Sep', 'September'],
+    ['Oct', 'October'],
+    ['Nov', 'November'],
+    ['Dec', 'December']
+  ];
+
+  const days = [
+    ['Sun', 'Sunday'],
+    ['Mon', 'Monday'],
+    ['Tue', 'Thuesday'],
+    ['Wed', 'Wednesday'],
+    ['Thu', 'Thursday'],
+    ['Fri', 'Friday'],
+    ['Sat', 'Saturday']
+  ];
 
   const patterns = {
     YYYY: ['getFullYear', 4],
     YY: ['getFullYear', 2],
+    MMMM: date => months[date.getMonth()][1],
+    MMM: date => months[date.getMonth()][0],
     MM: ['getMonth', 2, 1],
+    DDDD: date => days[date.getDay()][1],
+    DDD: date => days[date.getDay()][0],
     DD: ['getDate', 2],
+    D: date => date.getDate(),
     HH: ['getHours', 2],
     mm: ['getMinutes', 2],
     ss: ['getSeconds', 2],
@@ -118,10 +151,12 @@ export const format = (function() {
       date = new Date(date);
     }
 
-    return pattern.replace(regex, function(match, key, rest) {
-      const [ method, chars, add = 0 ] = patterns[key];
+    return pattern.replace(regex, function(match, key, rest = '') {
+      const formatter = patterns[key];
+      if (isFunction(formatter)) return formatter(date) + rest;
+      const [ method, chars, add = 0 ] = formatter;
       const value = `00${String(date[method]() + add).padStart(chars, '0')}`;
-      return value.slice(-chars) + (rest || '');
+      return value.slice(-chars) + rest;
     });
   }
 

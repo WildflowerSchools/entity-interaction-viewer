@@ -221,13 +221,13 @@ const styles = document.createTextNode(css`
     margin-top: 2em;
     margin-bottom: 2em;
   }
-  .wfs-chart-header strong {
+  .wfs-chart-header strong { /* student */
     display: inline-block;
-    margin-right: 0.625em;
+    margin-right: 0.75em;
     font-size: 1.25em;
     font-weight: 700;
   }
-  .wfs-chart-header span {
+  .wfs-chart-header span { /* dates */
     color: ${colors.gray};
   }
 
