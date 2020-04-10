@@ -11,7 +11,7 @@
   "dependencies": {
     "@nivo/bar": "^0.59.2",
     "@nivo/pie": "^0.59.1",
-    "auth0-js": "^9.11.3",
+    "auth0-js": "^9.13.2",
     "domready": "^1.0.8",
     "graphql-hooks": "^4.0.0",
     "react": "^16.9.0",
